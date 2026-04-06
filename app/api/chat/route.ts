@@ -38,7 +38,8 @@ export async function POST(request: Request) {
 
         stream.on("error", (error) => {
           console.error("Stream error:", error);
-          controller.error(error);
+          controller.enqueue(encoder.encode("\n\n[An error occurred while generating the response. Please try again.]"));
+          controller.close();
         });
       },
     });

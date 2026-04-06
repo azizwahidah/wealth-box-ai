@@ -26,8 +26,6 @@ export async function POST(request: Request) {
     return Response.json(response);
   } catch (error) {
     console.error("Wealthbox API error:", error);
-    const message =
-      error instanceof Error ? error.message : "Internal server error";
-    return Response.json({ error: { message } }, { status: 500 });
+    return Response.json({ error: { message: "Internal server error" } }, { status: 500 });
   }
 }

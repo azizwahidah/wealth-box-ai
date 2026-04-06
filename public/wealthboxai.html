@@ -1324,7 +1324,8 @@ WHAT TO INCLUDE:
     }, 12);
 
   } catch (err) {
-    messages.push({ role: 'assistant', content: '⚠️ Error: ' + err.message + '\n\nPlease try again. If the issue persists, contact support.' });
+    console.error('Chat error:', err);
+    messages.push({ role: 'assistant', content: '⚠️ Something went wrong. Please try again. If the issue persists, contact support.' });
     loading = false;
     renderChat();
   }
