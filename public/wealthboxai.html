@@ -380,6 +380,11 @@ const PROFILES = [
     debt: { "Student Loans": 42000, "Credit Card": 3200 },
     accs: ["Checking", "Savings", "401(k) – Hospital Plan"],
     goals: ["Pay off student loans in 5 years", "Build 6-month emergency fund", "Save for first home down payment"],
+    subGoals: [
+      { id: 'remit_pr', name: 'Monthly remittance to family in PR', desc: 'Sending support back home', cost: 400, cadence: 'monthly', horizon: 'ongoing', enabled: true },
+      { id: 'bring_mami', name: 'Bring Mami to Philly', desc: 'Relocation + 2 yrs of housing help', cost: 30000, cadence: 'one-time', horizon: 'within 5 yrs', enabled: false },
+      { id: 'cousin_nursing', name: "Sponsor cousin's nursing program", desc: 'Community college tuition', cost: 15000, cadence: 'one-time', horizon: 'over 2 yrs', enabled: false }
+    ],
     sub: "Single nurse · $65K · Renter",
     bio: "Maria moved from Puerto Rico to Philadelphia at 22 to pursue nursing. She graduated top of her class but took on significant student loan debt to do it. Now working night shifts at a busy urban hospital, she's laser-focused on becoming debt-free before 33. She dreams of buying a small rowhome in her neighborhood and eventually going back for her Nurse Practitioner degree. She's disciplined with spending but feels overwhelmed by the math of balancing loan payments, saving, and living on her own.",
     suitability: {
@@ -429,6 +434,11 @@ const PROFILES = [
     debt: { "Mortgage": 320000, "Car Loan": 14000 },
     accs: ["Joint Checking", "HYSA", "401(k) ×2", "529 Plans ×2", "Taxable Brokerage"],
     goals: ["Fund two college educations", "Max retirement contributions", "Pay off mortgage in 12 yrs"],
+    subGoals: [
+      { id: 'kids_college_full', name: "Cover Emma & Lucas's college in full", desc: 'No student loans for either kid', cost: 300000, cadence: 'one-time', horizon: 'by 2030–2033', enabled: true },
+      { id: 'parents_downsize', name: "Help Jen's parents downsize", desc: 'Cover the gap on their move', cost: 40000, cadence: 'one-time', horizon: 'within 3 yrs', enabled: false },
+      { id: 'kids_first_cars', name: 'First car for each kid', desc: 'When each turns 16', cost: 25000, cadence: 'one-time', horizon: '2030 + 2033', enabled: false }
+    ],
     sub: "Married · $185K HHI · Homeowners",
     bio: "David is a senior software engineer at a mid-size tech company; Jen teaches 4th grade at a public school. They have two kids — Emma (12) and Lucas (9) — and live in a suburban home outside Denver they bought in 2019. They're solid earners but feel the squeeze of saving for two college funds, maxing retirement, and still having a life. David worries they started investing too late. Jen wants to make sure they're not sacrificing today for a future that's not guaranteed. They argue about money sometimes but agree on one thing: they don't want their kids graduating with debt.",
     suitability: {
@@ -529,6 +539,11 @@ const PROFILES = [
     debt: { "Mortgage": 410000, "Business Loan": 65000 },
     accs: ["Business Checking", "Personal Checking", "SEP-IRA", "Roth IRA", "Brokerage"],
     goals: ["Optimize tax strategy", "Grow investment portfolio", "Retire early at 55"],
+    subGoals: [
+      { id: 'daughter_private_college', name: "Daughter's full college tuition (private)", desc: 'Private 4-year college fund', cost: 300000, cadence: 'one-time', horizon: 'by 2038', enabled: true },
+      { id: 'parents_home_india', name: 'Buy parents a home in India', desc: 'Major aspirational gift', cost: 240000, cadence: 'one-time', horizon: 'within 10 yrs', enabled: false },
+      { id: 'sister_mba', name: "Fund younger sister's MBA", desc: 'Tuition + living over 2 yrs', cost: 80000, cadence: 'one-time', horizon: 'over 2 yrs', enabled: false }
+    ],
     sub: "Business owner · $220K · Investor",
     bio: "Priya runs a growing e-commerce brand selling sustainable home goods out of Austin. Her husband Raj works in healthcare administration. They have a 4-year-old daughter and recently bought their first home. Priya is financially savvy — she maxes out retirement accounts and invests actively — but she's tangled up in the complexity of business vs. personal finances, quarterly estimated taxes, and whether to take salary vs. distributions from her LLC. She wants to retire by 55 and is willing to be aggressive to get there, but needs help optimizing the path.",
     suitability: {
@@ -580,6 +595,9 @@ const PROFILES = [
     debt: { "Student Loans": 28000, "Credit Card": 1800 },
     accs: ["Checking", "401(k) – 3% employer match"],
     goals: ["Take full advantage of 401(k) match", "Open first investment account", "Build and stick to a budget"],
+    subGoals: [
+      { id: 'mom_retire_aspirational', name: 'Eventually help Mom retire', desc: "Not real yet — show what it'd take over 30 yrs", cost: 1000000, cadence: 'one-time', horizon: 'long-term aspirational', enabled: false }
+    ],
     sub: "Recent grad · $38K · Just starting",
     bio: "Jordan graduated from community college last year with an associate's degree in business and now manages a retail store in Atlanta. They live with a roommate to keep costs down. Jordan grew up in a household where money was tight and nobody talked about investing — so everything about finance feels new and intimidating. They recently started a 401(k) through work but aren't sure if they're doing it right. Jordan is eager to learn, asks a lot of questions, and wants to build the kind of financial stability they never had growing up.",
     suitability: {
@@ -908,6 +926,23 @@ function renderCard(p) {
       <div style="margin-bottom:9px">${p.accs.map(a => `<span class="tag">${a}</span>`).join('')}</div>
       <div class="section-label">Goals</div>
       ${p.goals.map(g => `<div class="goal-item"><div class="goal-dot"></div><span style="font-size:11px;color:#4a4a4a">${g}</span></div>`).join('')}
+      ${p.subGoals && p.subGoals.length > 0 ? `
+        <div class="section-label" style="margin-top:12px">Sub-goals <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#8b7355;font-size:10px">· toggle to see impact</span></div>
+        ${p.subGoals.map(sg => {
+          const on = getEffectiveEnabled(p, sg);
+          return `
+            <div onclick="toggleSubGoal(${p.id}, '${sg.id}')" style="display:flex;align-items:center;gap:10px;padding:7px 9px;background:${on ? '#f3f9f6' : '#faf8f4'};border:1px solid ${on ? '#a8d4c2' : '#e8e3d8'};border-radius:7px;cursor:pointer;margin-bottom:4px;transition:all 0.15s">
+              <div style="width:28px;height:16px;background:${on ? '#022e21' : '#c9c2b4'};border-radius:8px;position:relative;flex-shrink:0;transition:background 0.2s">
+                <div style="width:12px;height:12px;background:#fff;border-radius:50%;position:absolute;top:2px;left:${on ? '14px' : '2px'};transition:left 0.2s"></div>
+              </div>
+              <div style="flex:1;min-width:0">
+                <div style="font-size:11px;font-weight:500;color:#022e21">${sg.name}</div>
+                <div style="font-size:10px;color:#8b7355;margin-top:1px">${sg.desc} · <strong>${formatSubGoalCost(sg)}</strong></div>
+              </div>
+            </div>
+          `;
+        }).join('')}
+      ` : ''}
       <div class="suit-section">
         <div class="section-label">Suitability Review</div>
         <div class="suit-grid">
@@ -1121,6 +1156,18 @@ async function sendMessage(text) {
 
   /* ── SYSTEM PROMPT — controls how Claude responds ── */
   const pct = getProfileCompleteness(p);
+  const enabledSubs = enabledSubGoals(p);
+  const subGoalsBlock = enabledSubs.length === 0 ? '' : `
+
+ADDITIONAL FINANCIAL COMMITMENTS — sub-goals the member has currently turned ON:
+${enabledSubs.map(sg => `- ${sg.name}: ${sg.cadence === 'monthly' ? '$' + sg.cost.toLocaleString() + '/mo ongoing' : '$' + sg.cost.toLocaleString() + ' (' + sg.horizon + ')'} — ${sg.desc}`).join('\n')}
+
+These are commitments the member has chosen to layer on top of their primary goals. When advising:
+- Factor them into cash-flow math and savings timelines. Don't ignore them.
+- Be honest if they conflict with core priorities like emergency fund or high-interest debt. Show the tradeoff with real numbers.
+- These often surface sandwich-generation or boundaries tensions — supporting parents/siblings while building your own future. When that's the dynamic, name it honestly and gently.
+- Do NOT moralize about whether to keep the commitment. That's the member's call. Show the impact and let them decide.
+- Sub-goals NOT in this list have been turned OFF by the member. Don't mention them.`;
   const systemPrompt = `You are a knowledgeable, empathetic AI financial advisor for Wealth Box. Your job is to give this specific member personalized, actionable financial guidance based on their exact financial situation.
 
 RESPONSE FORMAT — FOLLOW THESE RULES IN EVERY SINGLE RESPONSE. NON-NEGOTIABLE:
@@ -1204,7 +1251,7 @@ MEMBER PROFILE:
 - Debt: ${Object.entries(p.debt).map(([k, v]) => `${k}: ${fmt(v)}`).join(', ')} | Total: ${fmt(debtTotal(p))}
 - Accounts: ${p.accs.join(', ')}
 - Financial Goals: ${p.goals.join('; ')}
-- Background Story: ${p.bio}
+- Background Story: ${p.bio}${subGoalsBlock}
 
 SUITABILITY REVIEW (MUST CHECK BEFORE EVERY RECOMMENDATION):
 - Risk Tolerance: ${p.suitability.riskTolerance}
@@ -1407,7 +1454,24 @@ function openGameplan() {
 
   const chartHtml = renderProjectionChart(p.projections);
 
+  const enabledSubs = enabledSubGoals(p);
+  const monthlyTotal = enabledSubs.filter(sg => sg.cadence === 'monthly').reduce((sum, sg) => sum + sg.cost, 0);
+  const oneTimeTotal = enabledSubs.filter(sg => sg.cadence === 'one-time').reduce((sum, sg) => sum + sg.cost, 0);
+  const subGoalBanner = enabledSubs.length === 0 ? '' : `
+    <div style="background:#fff7ed;border:1px solid #fcd9a8;border-radius:10px;padding:12px 16px;margin-bottom:14px">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+        <span style="font-size:14px">📌</span>
+        <strong style="color:#022e21;font-size:13px">${enabledSubs.length} sub-goal${enabledSubs.length === 1 ? '' : 's'} active</strong>
+        <span style="color:#8b7355;font-size:11px">${monthlyTotal > 0 ? ' · $' + monthlyTotal.toLocaleString() + '/mo recurring' : ''}${oneTimeTotal > 0 ? ' · $' + oneTimeTotal.toLocaleString() + ' total in one-time commitments' : ''}</span>
+      </div>
+      <div style="font-size:11px;color:#4a4a4a;line-height:1.6">
+        ${enabledSubs.map(sg => `<div>• <strong>${sg.name}</strong> — ${formatSubGoalCost(sg)}</div>`).join('')}
+      </div>
+      <div style="font-size:10px;color:#8b7355;margin-top:8px;font-style:italic">These commitments compete with the priority order below. Ask the AI advisor how they affect your timelines.</div>
+    </div>`;
+
   document.getElementById('gpBody').innerHTML = `
+    ${subGoalBanner}
     <div class="gp-priority">
       <strong>Priority Order:</strong> 1) Emergency Fund → 2) 401(k) Match → 3) Kill High-Interest Debt (9%+) → 4) HSA → 5) Roth IRA → 6) Max 401(k) → 7) Mega Backdoor Roth → 8) Taxable Brokerage → 9) 529 Plans
     </div>
@@ -1613,6 +1677,41 @@ function loadCustomProfiles() {
       PROFILES.push(p);
     }
   });
+}
+
+/* ── SUB-GOAL TOGGLE STATE ── */
+function getSubGoalOverrides() {
+  return JSON.parse(localStorage.getItem('wealthbox_subgoal_state') || '{}');
+}
+
+function getEffectiveEnabled(profile, subGoal) {
+  const overrides = getSubGoalOverrides();
+  if (overrides[profile.id] && subGoal.id in overrides[profile.id]) {
+    return overrides[profile.id][subGoal.id];
+  }
+  return !!subGoal.enabled;
+}
+
+function toggleSubGoal(profileId, subGoalId) {
+  const profile = PROFILES.find(p => p.id === profileId);
+  if (!profile || !profile.subGoals) return;
+  const sg = profile.subGoals.find(s => s.id === subGoalId);
+  if (!sg) return;
+  const overrides = getSubGoalOverrides();
+  if (!overrides[profileId]) overrides[profileId] = {};
+  overrides[profileId][subGoalId] = !getEffectiveEnabled(profile, sg);
+  localStorage.setItem('wealthbox_subgoal_state', JSON.stringify(overrides));
+  renderCard(profile);
+}
+
+function enabledSubGoals(profile) {
+  if (!profile.subGoals) return [];
+  return profile.subGoals.filter(sg => getEffectiveEnabled(profile, sg));
+}
+
+function formatSubGoalCost(sg) {
+  if (sg.cadence === 'monthly') return '$' + sg.cost.toLocaleString() + '/mo · ' + sg.horizon;
+  return '$' + sg.cost.toLocaleString() + ' · ' + sg.horizon;
 }
 
 function updateMemberCount() {
