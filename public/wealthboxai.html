@@ -20,9 +20,11 @@
     flex-wrap: wrap;
     gap: 10px;
   }
-  .logo { color: #fff; font-family: 'DM Serif Display', serif; font-size: 22px; }
+  .logo { color: #fff; font-family: 'DM Serif Display', serif; font-size: 22px; line-height: 1.15; }
   .logo span { color: #CC6600; }
-  .logo small { font-family: 'DM Sans', sans-serif; font-size: 11px; color: #8fa3bc; font-weight: 400; margin-left: 10px; letter-spacing: 0.5px; }
+  .logo .logo-name { display: block; }
+  .logo .logo-demo { display: inline-block; background: rgba(204, 102, 0, 0.18); color: #f0a050; font-family: 'DM Sans', sans-serif; font-size: 9px; font-weight: 600; letter-spacing: 0.9px; padding: 2px 7px; border-radius: 10px; margin-left: 8px; vertical-align: middle; }
+  .logo .logo-tag { font-family: 'DM Sans', sans-serif; font-size: 11px; color: #d4b896; font-weight: 400; font-style: italic; margin-top: 2px; letter-spacing: 0.2px; }
 
   /* ── MAIN LAYOUT ── */
   .main { display: grid; grid-template-columns: var(--sidebar-width, 340px) 1fr; flex: 1; height: calc(100vh - 53px); grid-template-rows: 1fr; }
@@ -251,7 +253,40 @@
   }
   .send-btn:hover { opacity: 0.85; }
   .send-btn:disabled { opacity: 0.35; cursor: not-allowed; }
-  .no-profile { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; color: #8b7355; gap: 8px; font-size: 13px; }
+  .no-profile { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; color: #8b7355; gap: 8px; font-size: 13px; padding: 30px 20px; }
+  .arc-hero { text-align: center; margin-bottom: 18px; }
+  .arc-hero h1 { font-family: 'DM Serif Display', serif; font-size: 28px; color: #022e21; line-height: 1.2; margin: 0 0 6px; }
+  .arc-hero p { font-size: 13px; color: #8b7355; margin: 0; max-width: 460px; }
+  .arc-stage { perspective: 1400px; width: 100%; max-width: 720px; height: 320px; position: relative; display: flex; align-items: center; justify-content: center; margin: 8px 0; }
+  .arc-card { position: absolute; width: 220px; height: 280px; background: #fff; border: 1px solid #e8e3d8; border-radius: 14px; padding: 18px 16px; box-shadow: 0 6px 20px rgba(2, 46, 33, 0.10); transition: transform 0.7s cubic-bezier(0.25, 0.1, 0.25, 1), opacity 0.7s, box-shadow 0.3s; cursor: pointer; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 6px; transform-style: preserve-3d; }
+  .arc-card.pos-current { transform: translateX(0) translateZ(80px) rotateY(0deg); z-index: 5; opacity: 1; box-shadow: 0 14px 36px rgba(2, 46, 33, 0.18); }
+  .arc-card.pos-prev    { transform: translateX(-200px) translateZ(0) rotateY(35deg); z-index: 4; opacity: 0.85; }
+  .arc-card.pos-next    { transform: translateX(200px)  translateZ(0) rotateY(-35deg); z-index: 4; opacity: 0.85; }
+  .arc-card.pos-prev2   { transform: translateX(-330px) translateZ(-80px) rotateY(50deg); z-index: 3; opacity: 0.45; }
+  .arc-card.pos-next2   { transform: translateX(330px)  translateZ(-80px) rotateY(-50deg); z-index: 3; opacity: 0.45; }
+  .arc-card.pos-hidden  { transform: translateX(0) translateZ(-200px) scale(0.5); opacity: 0; pointer-events: none; }
+  .arc-card-avatar { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; border: 2px solid; }
+  .arc-card-name { font-size: 15px; font-weight: 600; color: #022e21; margin-top: 6px; }
+  .arc-card-nick { font-size: 11px; color: #022e21; font-style: italic; opacity: 0.7; }
+  .arc-card-sub  { font-size: 11px; color: #4a4a4a; line-height: 1.45; padding: 0 4px; }
+  .arc-card-cta  { font-size: 11px; color: #CC6600; font-weight: 600; margin-top: auto; padding-top: 10px; }
+  .arc-card.pos-current:hover { transform: translateX(0) translateZ(90px) rotateY(0deg) scale(1.02); }
+  .arc-nav { display: flex; align-items: center; justify-content: center; gap: 14px; margin-top: 10px; }
+  .arc-arrow { background: #fff; border: 1px solid #e8e3d8; border-radius: 50%; width: 34px; height: 34px; cursor: pointer; color: #022e21; font-size: 16px; transition: all 0.15s; display: flex; align-items: center; justify-content: center; }
+  .arc-arrow:hover { border-color: #CC6600; color: #CC6600; }
+  .arc-dots { display: flex; gap: 7px; }
+  .arc-dot { width: 7px; height: 7px; border-radius: 50%; background: #c9c2b4; transition: all 0.3s; cursor: pointer; border: none; padding: 0; }
+  .arc-dot.active { background: #CC6600; transform: scale(1.3); }
+  .arc-foot { font-size: 11px; color: #8b7355; text-align: center; margin-top: 14px; max-width: 480px; line-height: 1.5; }
+  @media (max-width: 768px) {
+    .arc-hero h1 { font-size: 22px; }
+    .arc-stage { height: 280px; }
+    .arc-card { width: 180px; height: 240px; padding: 14px 12px; }
+    .arc-card.pos-prev    { transform: translateX(-150px) translateZ(0) rotateY(40deg); }
+    .arc-card.pos-next    { transform: translateX(150px)  translateZ(0) rotateY(-40deg); }
+    .arc-card.pos-prev2,
+    .arc-card.pos-next2   { opacity: 0; pointer-events: none; }
+  }
 
   /* ── MOBILE TOGGLE ── */
   .mobile-toggle { display: none; }
@@ -261,7 +296,7 @@
   @media (max-width: 768px) {
     .topbar { padding: 10px 16px; }
     .logo { font-size: 18px; }
-    .logo small { display: none; }
+    .logo .logo-tag { font-size: 10px; }
     .main { grid-template-columns: 1fr; height: calc(100vh - 47px); }
     .sidebar { position: absolute; inset: 0; top: 47px; z-index: 100; display: flex; }
     .sidebar.hidden { display: none; }
@@ -331,7 +366,10 @@
 <body>
 
 <div class="topbar">
-  <div class="logo">Wealth <span>Box</span> <small>AI FINANCIAL ADVISOR DEMO</small></div>
+  <div class="logo">
+    <div class="logo-name">Wealth <span>Box</span> <span class="logo-demo">DEMO</span></div>
+    <div class="logo-tag">Built for the ones catching the entire family.</div>
+  </div>
   <div style="display:flex;align-items:center;gap:14px">
     <span style="font-size:11px;color:#8fa3bc;display:flex;align-items:center;gap:5px">
       <span style="width:7px;height:7px;border-radius:50%;background:#CC6600;display:inline-block"></span>
@@ -349,20 +387,7 @@
     <div id="profileCard" style="flex:1;min-height:0;overflow-y:auto"></div>
     <div class="resize-handle" id="resizeHandle"></div>
   </div>
-  <div class="chat-area" id="chatArea">
-    <div class="no-profile">
-      <div style="font-size:32px;opacity:0.25">👤</div>
-      <div style="font-weight:600;color:#022e21;font-size:16px">Select a member profile or add your own</div>
-      <div>to start an AI-powered financial conversation</div>
-      <div style="margin-top:24px;display:flex;align-items:center;gap:14px">
-        <span style="font-size:54px;line-height:1;color:#022e21;animation:nudge 1.5s ease-in-out infinite">&larr;</span>
-        <div style="text-align:left">
-          <div style="font-size:13px;color:#022e21;font-weight:600">Pick one from the list</div>
-          <div style="font-size:11px;color:#8b7355">or hit &ldquo;+ Add&rdquo; at the top</div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <div class="chat-area" id="chatArea"></div>
 </div>
 
 <script>
@@ -378,14 +403,17 @@ const PROFILES = [
     nick: "The Debt Slayer", emoji: "👩🏽‍⚕️",
     job: "Registered Nurse", status: "Single", hh: 1, inc: 65000, own: false,
     debt: { "Student Loans": 42000, "Credit Card": 3200 },
+    debtRates: { "Student Loans": 0.06, "Credit Card": 0.25 },
     accs: ["Checking", "Savings", "401(k) – Hospital Plan"],
-    goals: ["Pay off student loans in 5 years", "Build 6-month emergency fund", "Save for first home down payment"],
-    subGoals: [
-      { id: 'remit_pr', name: 'Monthly remittance to family in PR', desc: 'Sending support back home', cost: 400, cadence: 'monthly', horizon: 'ongoing', enabled: true },
-      { id: 'bring_mami', name: 'Bring Mami to Philly', desc: 'Relocation + 2 yrs of housing help', cost: 30000, cadence: 'one-time', horizon: 'within 5 yrs', enabled: false },
-      { id: 'cousin_nursing', name: "Sponsor cousin's nursing program", desc: 'Community college tuition', cost: 15000, cadence: 'one-time', horizon: 'over 2 yrs', enabled: false }
+    goals: [
+      { id: 'student_loans', name: 'Pay off student loans', desc: '5-year payoff target', enabled: true, amount: 42000, cadence: 'one-time', targetYear: 2031, currentSaved: 0, kind: 'debt', interestRate: 0.06, slot: 'parallel' },
+      { id: 'home_downpayment', name: 'First home down payment', desc: 'Rowhome in her Philly neighborhood', enabled: true, amount: 40000, cadence: 'one-time', targetYear: 2035, currentSaved: 0, kind: 'cash', slot: 'parallel' },
+      { id: 'remit_pr', name: 'Monthly remittance to family in PR', desc: 'Survival support back home', enabled: true, amount: 400, cadence: 'monthly', targetYear: null, currentSaved: 0, kind: 'survival', slot: 'floor' },
+      { id: 'bring_mami', name: 'Bring Mami to Philly', desc: 'Relocation + 2 yrs of housing help', enabled: false, amount: 30000, cadence: 'one-time', targetYear: 2031, currentSaved: 0, kind: 'cash', slot: 'parallel' },
+      { id: 'cousin_nursing', name: "Sponsor cousin's nursing program", desc: 'Community college tuition', enabled: false, amount: 15000, cadence: 'one-time', targetYear: 2028, currentSaved: 0, kind: 'cash', slot: 'parallel' }
     ],
-    sub: "Single nurse · $65K · Renter",
+    matchAccess: 'unknown',
+    sub: "$400/mo home + $42K student loans · Nurse, 28",
     bio: "Maria moved from Puerto Rico to Philadelphia at 22 to pursue nursing. She graduated top of her class but took on significant student loan debt to do it. Now working night shifts at a busy urban hospital, she's laser-focused on becoming debt-free before 33. She dreams of buying a small rowhome in her neighborhood and eventually going back for her Nurse Practitioner degree. She's disciplined with spending but feels overwhelmed by the math of balancing loan payments, saving, and living on her own.",
     suitability: {
       riskTolerance: "Moderate",
@@ -406,40 +434,23 @@ const PROFILES = [
       accreditedInvestor: "No",
       specialCircumstances: "None"
     },
-    gameplan: [
-      { step: 1, title: "Emergency Fund", desc: "Build 6 months of expenses ($19,200) in a high-yield savings account. You have ~$4,800 saved — $14,400 to go. As a single-income household, this is non-negotiable. When an emergency hits, you can't afford to dip into investments or add more debt.", target: 19200, current: 4800, monthly: 600, months: 24, date: "Mar 2028", status: "active" },
-      { step: 2, title: "401(k) Employer Match", desc: "Contribute at least enough to your hospital 401(k) to get the full employer match. This is a guaranteed 100% return on your money — don't leave it on the table. Contribute to the Roth 401(k) option if available so withdrawals are tax-free in retirement.", target: 1950, current: 0, monthly: 162, months: 0, date: "Now — ongoing", status: "active" },
-      { step: 3, title: "Pay Off Credit Card", desc: "Your $3,200 CC debt at ~20% APR is costing you ~$640/yr in interest. That's more than the market returns. Once your emergency fund is on track, throw everything at this. Every dollar of CC interest is a dollar stolen from your future.", target: 3200, current: 0, monthly: 500, months: 7, date: "Oct 2028", status: "pending" },
-      { step: 4, title: "Open & Fund Roth IRA", desc: "At $65K income and 22% bracket, Roth IRA is perfect for you. Your money grows tax-free for 30+ years. Max contribution is $7,000/yr. Even $200/mo makes a huge difference starting at 28.", target: 7000, current: 0, monthly: 400, months: 18, date: "Apr 2030", status: "pending" },
-      { step: 5, title: "Increase 401(k) Toward Max", desc: "Work toward the $23,500/yr max. Even bumping your contribution by 1% each year creates massive compounding over your career. You have time on your side — use it.", target: 23500, current: 1950, monthly: 0, months: 0, date: "Ramp up annually", status: "pending" },
-      { step: 6, title: "Save for Home Down Payment", desc: "Target 10-20% down ($30K-$50K). Open a separate HYSA so this doesn't mix with your emergency fund. Look into first-time homebuyer programs — FHA loans allow as low as 3.5% down.", target: 40000, current: 0, monthly: 500, months: 80, date: "~2035", status: "pending" }
-    ],
-    projections: [
-      { year: 2026, netWorth: -37200 },
-      { year: 2027, netWorth: -28000 },
-      { year: 2028, netWorth: -16000 },
-      { year: 2029, netWorth: -2000 },
-      { year: 2030, netWorth: 15000 },
-      { year: 2031, netWorth: 35000 },
-      { year: 2032, netWorth: 58000 },
-      { year: 2033, netWorth: 84000 },
-      { year: 2034, netWorth: 115000 },
-      { year: 2035, netWorth: 150000 }
-    ]
+    assets: { homeValue: 0, retirementBalance: 0 }
   },
   {
     id: 2, name: "David & Jen Chen", age: 45, ini: "DC", bg: "#dce8fb", fg: "#1a4a8a",
     nick: "The Power Couple", emoji: "👫🏻",
     job: "Software Engineer + Teacher", status: "Married", hh: 4, inc: 185000, own: true,
     debt: { "Mortgage": 320000, "Car Loan": 14000 },
+    debtRates: { "Mortgage": 0.04, "Car Loan": 0.06 },
     accs: ["Joint Checking", "HYSA", "401(k) ×2", "529 Plans ×2", "Taxable Brokerage"],
-    goals: ["Fund two college educations", "Max retirement contributions", "Pay off mortgage in 12 yrs"],
-    subGoals: [
-      { id: 'kids_college_full', name: "Cover Emma & Lucas's college in full", desc: 'No student loans for either kid', cost: 300000, cadence: 'one-time', horizon: 'by 2030–2033', enabled: true },
-      { id: 'parents_downsize', name: "Help Jen's parents downsize", desc: 'Cover the gap on their move', cost: 40000, cadence: 'one-time', horizon: 'within 3 yrs', enabled: false },
-      { id: 'kids_first_cars', name: 'First car for each kid', desc: 'When each turns 16', cost: 25000, cadence: 'one-time', horizon: '2030 + 2033', enabled: false }
+    goals: [
+      { id: 'kids_college_full', name: "Cover Emma & Lucas's college in full", desc: 'No student loans for either kid', enabled: true, amount: 300000, cadence: 'one-time', targetYear: 2032, currentSaved: 28000, kind: 'invest', slot: 'parallel' },
+      { id: 'mortgage_payoff', name: 'Pay off mortgage in 12 yrs', desc: 'Target ~2038', enabled: true, amount: 320000, cadence: 'one-time', targetYear: 2038, currentSaved: 0, kind: 'debt', interestRate: 0.04, slot: 'parallel' },
+      { id: 'parents_downsize', name: "Help Jen's parents downsize", desc: 'Cover the gap on their move', enabled: false, amount: 40000, cadence: 'one-time', targetYear: 2029, currentSaved: 0, kind: 'cash', slot: 'parallel' },
+      { id: 'kids_first_cars', name: 'First car for each kid', desc: 'When each turns 16', enabled: false, amount: 25000, cadence: 'one-time', targetYear: 2033, currentSaved: 0, kind: 'cash', slot: 'parallel' }
     ],
-    sub: "Married · $185K HHI · Homeowners",
+    matchAccess: 'unknown',
+    sub: "Two college funds + retirement squeeze · 45, $185K HHI",
     bio: "David is a senior software engineer at a mid-size tech company; Jen teaches 4th grade at a public school. They have two kids — Emma (12) and Lucas (9) — and live in a suburban home outside Denver they bought in 2019. They're solid earners but feel the squeeze of saving for two college funds, maxing retirement, and still having a life. David worries they started investing too late. Jen wants to make sure they're not sacrificing today for a future that's not guaranteed. They argue about money sometimes but agree on one thing: they don't want their kids graduating with debt.",
     suitability: {
       riskTolerance: "Moderate",
@@ -460,37 +471,20 @@ const PROFILES = [
       accreditedInvestor: "No",
       specialCircumstances: "None"
     },
-    gameplan: [
-      { step: 1, title: "Top Up Emergency Fund", desc: "You have 4 months saved — push to 6 months ($51,000). With two kids and a mortgage, a dual-income household still needs a full cushion. One layoff or medical bill shouldn't derail years of progress.", target: 51000, current: 34000, monthly: 1500, months: 12, date: "Mar 2027", status: "active" },
-      { step: 2, title: "401(k) Matches ×2", desc: "Both of you should contribute enough to capture your full employer matches. David's tech company likely offers 3-6% match; Jen's district plan may also match. This is guaranteed money with a deadline — miss it and it's gone.", target: 0, current: 0, monthly: 0, months: 0, date: "Now — ongoing", status: "active" },
-      { step: 3, title: "No High-Interest Debt", desc: "Your mortgage (~3-4%) and car loan (~5%) are both below the 9% threshold. No action needed here — just keep making regular payments. The car loan will be paid off naturally.", target: 0, current: 0, monthly: 0, months: 0, date: "✅ Clear", status: "done" },
-      { step: 4, title: "HSA (If Eligible)", desc: "If either employer offers a high-deductible health plan, open an HSA. It's the triple tax advantage: deductible now, grows tax-free, tax-free for medical expenses. After 65, it works like a bonus IRA. Family limit is $8,550/yr.", target: 8550, current: 0, monthly: 712, months: 12, date: "Mar 2028", status: "pending" },
-      { step: 5, title: "Max Both Roth IRAs", desc: "At $185K combined, you're under the Roth IRA income limit (MFJ). Max both at $7,000 each = $14,000/yr. Tax-free growth for 20+ years is how you close the gap to early retirement.", target: 14000, current: 0, monthly: 1167, months: 12, date: "Mar 2029", status: "pending" },
-      { step: 6, title: "Max Both 401(k)s", desc: "Push toward maxing both 401(k)s at $23,500 each = $47,000/yr combined. This is aggressive but at $185K household income, it's achievable. Prioritize Roth 401(k) contributions while in the 24% bracket.", target: 47000, current: 0, monthly: 3917, months: 12, date: "Ongoing", status: "pending" },
-      { step: 7, title: "Fund 529 Plans", desc: "Emma (12) has ~6 years to college; Lucas (9) has ~9 years. Don't sacrifice retirement for this — you can't take a loan for retirement. But with surplus after the above, aim for $300-500/mo per child.", target: 120000, current: 28000, monthly: 800, months: 0, date: "Ongoing to 2035", status: "pending" },
-      { step: 8, title: "Accelerate Mortgage Payoff", desc: "Once retirement and college savings are on track, put extra toward the $320K mortgage. Even $500/mo extra can shave 7+ years off a 30-year mortgage and save over $100K in interest.", target: 320000, current: 0, monthly: 500, months: 0, date: "Target: 2035", status: "pending" }
-    ],
-    projections: [
-      { year: 2026, netWorth: 320000 },
-      { year: 2027, netWorth: 395000 },
-      { year: 2028, netWorth: 480000 },
-      { year: 2029, netWorth: 575000 },
-      { year: 2030, netWorth: 685000 },
-      { year: 2031, netWorth: 810000 },
-      { year: 2032, netWorth: 950000 },
-      { year: 2033, netWorth: 1100000 },
-      { year: 2034, netWorth: 1270000 },
-      { year: 2035, netWorth: 1460000 }
-    ]
+    assets: { homeValue: 400000, retirementBalance: 159000 }
   },
   {
     id: 3, name: "Marcus Williams", age: 52, ini: "MW", bg: "#fde8d8", fg: "#8a3a10",
     nick: "The Comeback King", emoji: "👨🏾‍🔧",
     job: "Long-Haul Truck Driver", status: "Divorced", hh: 1, inc: 54000, own: false,
     debt: { "Credit Card": 18500, "Car Loan": 9200 },
+    debtRates: { "Credit Card": 0.25, "Car Loan": 0.06 },
     accs: ["Checking", "Savings (minimal)"],
-    goals: ["Eliminate credit card debt", "Start retirement savings", "Reduce monthly expenses"],
-    sub: "Divorced · $54K · High CC debt",
+    goals: [
+      { id: 'next_truck_cash', name: 'Buy next truck cash (no new loan)', desc: 'When current truck retires', enabled: false, amount: 20000, cadence: 'one-time', targetYear: 2033, currentSaved: 0, kind: 'cash', slot: 'parallel' }
+    ],
+    matchAccess: 'unknown',
+    sub: "Post-divorce rebuild · $18.5K CC debt · Trucker, 52",
     bio: "Marcus has been driving trucks for 26 years. After his divorce three years ago, he lost the house and most of his savings in the settlement. He racked up credit card debt covering legal fees and setting up a new apartment in Memphis. He has no retirement savings and that keeps him up at night — he knows his body can't do this job forever. He's proud, private about money, and skeptical of financial advice after a bad experience with a commission-based advisor years ago. He needs a clear, no-nonsense plan he can stick to from the road.",
     suitability: {
       riskTolerance: "Conservative",
@@ -511,40 +505,24 @@ const PROFILES = [
       accreditedInvestor: "No",
       specialCircumstances: "Divorce settlement finalized 2023; physical job may limit working years"
     },
-    gameplan: [
-      { step: 1, title: "Emergency Fund", desc: "You need at minimum 3 months of expenses ($10,200) in a HYSA. You have about $1,700. This is critical — one truck breakdown or medical issue and you're back in debt. Cut expenses where possible and funnel $400/mo here.", target: 10200, current: 1700, monthly: 400, months: 22, date: "Jan 2028", status: "active" },
-      { step: 2, title: "Check for Employer Retirement Plan", desc: "Ask your trucking company if they offer a 401(k) with match. Many larger carriers do. If there's a match, contribute just enough to get it — even 2-3% matters when you're starting at zero at 52.", target: 0, current: 0, monthly: 0, months: 0, date: "Check now", status: "active" },
-      { step: 3, title: "Destroy Credit Card Debt", desc: "Your $18,500 at ~22% APR is costing you over $4,000/yr in interest alone. This is the #1 thing bleeding your finances. Use avalanche method — minimum payments on everything else, max payments here. Consider a balance transfer card at 0% intro APR.", target: 18500, current: 0, monthly: 500, months: 37, date: "Feb 2031", status: "pending" },
-      { step: 4, title: "Pay Off Car Loan", desc: "At ~6% interest, this is below the 9% threshold but still worth paying off for cash flow freedom. Once the CC is done, redirect that $500/mo here.", target: 9200, current: 0, monthly: 500, months: 18, date: "Aug 2032", status: "pending" },
-      { step: 5, title: "Open Roth IRA", desc: "At 52 and $54K income, a Roth IRA is your best friend. You won't have decades of growth, but 13+ years until you're 65 still matters. Max at $7,000/yr (or $8,000 if 50+ catch-up applies). Every dollar grows tax-free.", target: 7000, current: 0, monthly: 583, months: 12, date: "Aug 2033", status: "pending" },
-      { step: 6, title: "Build Taxable Brokerage", desc: "Once debt is cleared and IRA is funded, open a simple brokerage account with low-cost index funds. This gives you flexibility — no age restrictions on withdrawals. Focus on conservative, income-producing investments given your timeline.", target: 0, current: 0, monthly: 300, months: 0, date: "Ongoing from 2033", status: "pending" }
-    ],
-    projections: [
-      { year: 2026, netWorth: -24900 },
-      { year: 2027, netWorth: -19500 },
-      { year: 2028, netWorth: -13000 },
-      { year: 2029, netWorth: -6000 },
-      { year: 2030, netWorth: 1500 },
-      { year: 2031, netWorth: 10000 },
-      { year: 2032, netWorth: 22000 },
-      { year: 2033, netWorth: 36000 },
-      { year: 2034, netWorth: 52000 },
-      { year: 2035, netWorth: 70000 }
-    ]
+    assets: { homeValue: 0, retirementBalance: 0 }
   },
   {
     id: 4, name: "Priya Patel", age: 35, ini: "PP", bg: "#f0e4fb", fg: "#6a1a8a",
     nick: "The Empire Builder", emoji: "👩🏽‍💼",
     job: "Small Business Owner", status: "Married", hh: 3, inc: 220000, own: true,
     debt: { "Mortgage": 410000, "Business Loan": 65000 },
+    debtRates: { "Mortgage": 0.04, "Business Loan": 0.07 },
     accs: ["Business Checking", "Personal Checking", "SEP-IRA", "Roth IRA", "Brokerage"],
-    goals: ["Optimize tax strategy", "Grow investment portfolio", "Retire early at 55"],
-    subGoals: [
-      { id: 'daughter_private_college', name: "Daughter's full college tuition (private)", desc: 'Private 4-year college fund', cost: 300000, cadence: 'one-time', horizon: 'by 2038', enabled: true },
-      { id: 'parents_home_india', name: 'Buy parents a home in India', desc: 'Major aspirational gift', cost: 240000, cadence: 'one-time', horizon: 'within 10 yrs', enabled: false },
-      { id: 'sister_mba', name: "Fund younger sister's MBA", desc: 'Tuition + living over 2 yrs', cost: 80000, cadence: 'one-time', horizon: 'over 2 yrs', enabled: false }
+    goals: [
+      { id: 'retire_55', name: 'Retire by 55 (FIRE)', desc: '$2.7M = 25× annual expenses', enabled: true, amount: 2700000, cadence: 'one-time', targetYear: 2046, currentSaved: 180000, kind: 'invest', slot: 'parallel' },
+      { id: 'business_loan', name: 'Pay down business loan', desc: '~7% SBA-style loan', enabled: true, amount: 65000, cadence: 'one-time', targetYear: 2030, currentSaved: 0, kind: 'debt', interestRate: 0.07, slot: 'parallel' },
+      { id: 'daughter_private_college', name: "Daughter's full college tuition (private)", desc: 'Private 4-year college fund', enabled: true, amount: 300000, cadence: 'one-time', targetYear: 2038, currentSaved: 5000, kind: 'invest', slot: 'parallel' },
+      { id: 'parents_home_india', name: 'Buy parents a home in India', desc: 'Major aspirational gift', enabled: false, amount: 240000, cadence: 'one-time', targetYear: 2036, currentSaved: 0, kind: 'cash', slot: 'parallel' },
+      { id: 'sister_mba', name: "Fund younger sister's MBA", desc: 'Tuition + living over 2 yrs', enabled: false, amount: 80000, cadence: 'one-time', targetYear: 2028, currentSaved: 0, kind: 'cash', slot: 'parallel' }
     ],
-    sub: "Business owner · $220K · Investor",
+    matchAccess: 'no',
+    sub: "FIRE by 55 · Daughter's college · Business owner, $220K",
     bio: "Priya runs a growing e-commerce brand selling sustainable home goods out of Austin. Her husband Raj works in healthcare administration. They have a 4-year-old daughter and recently bought their first home. Priya is financially savvy — she maxes out retirement accounts and invests actively — but she's tangled up in the complexity of business vs. personal finances, quarterly estimated taxes, and whether to take salary vs. distributions from her LLC. She wants to retire by 55 and is willing to be aggressive to get there, but needs help optimizing the path.",
     suitability: {
       riskTolerance: "Aggressive",
@@ -565,40 +543,21 @@ const PROFILES = [
       accreditedInvestor: "Yes",
       specialCircumstances: "LLC business structure; mixed personal/business finances"
     },
-    gameplan: [
-      { step: 1, title: "Emergency Fund", desc: "You're at 6 months — excellent. Keep this topped up as your business expenses grow. Consider keeping a separate 3-month business emergency fund in addition to personal.", target: 54000, current: 54000, monthly: 0, months: 0, date: "✅ Complete", status: "done" },
-      { step: 2, title: "Solo 401(k) Setup", desc: "As an LLC owner, open a Solo 401(k) instead of relying only on your SEP-IRA. You can contribute as both employee ($23,500) and employer (up to 25% of net self-employment income). This gives you more contribution room. Choose Roth option for employee contributions.", target: 23500, current: 0, monthly: 1958, months: 12, date: "Now — ongoing", status: "active" },
-      { step: 3, title: "Pay Down Business Loan", desc: "At what rate? If it's above 9%, prioritize this. If it's 6-7% (SBA rate), it's manageable. At $65K remaining, even $1,500/mo extra gets it done in 3.5 years and saves thousands in interest.", target: 65000, current: 0, monthly: 1500, months: 43, date: "Oct 2029", status: "active" },
-      { step: 4, title: "Max HSA", desc: "If you can switch to a high-deductible health plan, the HSA triple tax advantage is huge at your 32% bracket. Family limit is $8,550/yr. Invest it — don't spend it. Pay medical out of pocket and let the HSA compound.", target: 8550, current: 0, monthly: 712, months: 12, date: "Ongoing annually", status: "pending" },
-      { step: 5, title: "Backdoor Roth IRA", desc: "At $220K MFJ, you're above the direct Roth IRA income limit. Use the backdoor method: contribute $7,000 to a traditional IRA, then convert to Roth. Do this for both you and Raj — $14,000/yr tax-free growth.", target: 14000, current: 7000, monthly: 1167, months: 12, date: "Ongoing annually", status: "active" },
-      { step: 6, title: "Mega Backdoor Roth", desc: "If your Solo 401(k) plan allows after-tax contributions, you can do a Mega Backdoor Roth — contributing up to $69,000/yr total (2025 limit) and converting the after-tax portion to Roth. This is advanced but powerful at your income level.", target: 69000, current: 0, monthly: 0, months: 0, date: "Evaluate annually", status: "pending" },
-      { step: 7, title: "Taxable Brokerage", desc: "You already have a brokerage account — keep feeding it. Focus on tax-efficient index funds (total market, international). Use tax-loss harvesting. This is your bridge to early retirement at 55, since retirement accounts have age restrictions.", target: 0, current: 45000, monthly: 2000, months: 0, date: "Ongoing", status: "active" },
-      { step: 8, title: "529 Plan for Daughter", desc: "Start funding a 529 for your 4-year-old. You have 14 years until college. Even $300/mo at 7% growth = ~$90K by age 18. Don't over-fund at the expense of retirement — she can get scholarships, you can't get a retirement loan.", target: 90000, current: 5000, monthly: 300, months: 168, date: "~2040", status: "pending" }
-    ],
-    projections: [
-      { year: 2026, netWorth: 340000 },
-      { year: 2027, netWorth: 430000 },
-      { year: 2028, netWorth: 535000 },
-      { year: 2029, netWorth: 660000 },
-      { year: 2030, netWorth: 805000 },
-      { year: 2031, netWorth: 975000 },
-      { year: 2032, netWorth: 1170000 },
-      { year: 2033, netWorth: 1400000 },
-      { year: 2034, netWorth: 1660000 },
-      { year: 2035, netWorth: 1960000 }
-    ]
+    assets: { homeValue: 500000, retirementBalance: 135000 }
   },
   {
     id: 5, name: "Jordan Rivera", age: 23, ini: "JR", bg: "#fef0d8", fg: "#7a4a08",
     nick: "The Fresh Start", emoji: "🧑🏽‍💻",
     job: "Retail Manager", status: "Single", hh: 2, inc: 38000, own: false,
     debt: { "Student Loans": 28000, "Credit Card": 1800 },
+    debtRates: { "Student Loans": 0.06, "Credit Card": 0.25 },
     accs: ["Checking", "401(k) – 3% employer match"],
-    goals: ["Take full advantage of 401(k) match", "Open first investment account", "Build and stick to a budget"],
-    subGoals: [
-      { id: 'mom_retire_aspirational', name: 'Eventually help Mom retire', desc: "Not real yet — show what it'd take over 30 yrs", cost: 1000000, cadence: 'one-time', horizon: 'long-term aspirational', enabled: false }
+    goals: [
+      { id: 'student_loans_jordan', name: 'Pay off student loans', desc: '$28K at 6% — 10-year horizon', enabled: true, amount: 28000, cadence: 'one-time', targetYear: 2036, currentSaved: 0, kind: 'debt', interestRate: 0.06, slot: 'parallel' },
+      { id: 'mom_retire_aspirational', name: 'Eventually help Mom retire', desc: "Aspirational — show what 30 yrs would take", enabled: false, amount: 1000000, cadence: 'one-time', targetYear: 2056, currentSaved: 0, kind: 'invest', slot: 'parallel' }
     ],
-    sub: "Recent grad · $38K · Just starting",
+    matchAccess: 'yes',
+    sub: "First-gen, just starting · $28K student loans · 23",
     bio: "Jordan graduated from community college last year with an associate's degree in business and now manages a retail store in Atlanta. They live with a roommate to keep costs down. Jordan grew up in a household where money was tight and nobody talked about investing — so everything about finance feels new and intimidating. They recently started a 401(k) through work but aren't sure if they're doing it right. Jordan is eager to learn, asks a lot of questions, and wants to build the kind of financial stability they never had growing up.",
     suitability: {
       riskTolerance: "Moderate",
@@ -619,35 +578,18 @@ const PROFILES = [
       accreditedInvestor: "No",
       specialCircumstances: "First-generation investor; limited financial literacy background"
     },
-    gameplan: [
-      { step: 1, title: "Emergency Fund", desc: "You need at least 3 months of expenses ($7,200) in a high-yield savings account. You have about $720 — $6,480 to go. This is your foundation. When something breaks or you get sick, you won't have to put it on a credit card. Start with $250/mo — automate it so you don't even think about it.", target: 7200, current: 720, monthly: 250, months: 26, date: "May 2028", status: "active" },
-      { step: 2, title: "401(k) to Get Full Match", desc: "Your employer matches 3%. At $38K, that's $1,140/yr in FREE money. Contribute at least 3% ($95/mo). Choose the Roth 401(k) option — pay taxes now while you're in the lowest bracket (12%), and pull it all out tax-free when you're earning more later.", target: 1140, current: 0, monthly: 95, months: 0, date: "Now — ongoing", status: "active" },
-      { step: 3, title: "Pay Off Credit Card", desc: "Your $1,800 CC debt at ~20%+ APR needs to go. At $150/mo, you're done in about a year. That interest is eating your money alive. Once it's paid off, don't close the card — it helps your credit score. Just don't carry a balance again.", target: 1800, current: 0, monthly: 150, months: 12, date: "Mar 2029", status: "pending" },
-      { step: 4, title: "Open a Roth IRA", desc: "This is the move that changes everything for a first-gen investor. At 23 and in the 12% tax bracket, Roth is a no-brainer. Start with even $50/mo. Your money has 40+ years to grow tax-free. Time is your biggest asset — use it.", target: 7000, current: 0, monthly: 200, months: 35, date: "Feb 2032", status: "pending" },
-      { step: 5, title: "Increase 401(k) Contributions", desc: "Once CC debt is gone and Roth IRA is going, bump your 401(k) by 1% each year. You won't miss it from your paycheck, but future-you will thank you. Going from 3% to 10% over 7 years is completely doable.", target: 23500, current: 1140, monthly: 0, months: 0, date: "Ramp up 1%/yr", status: "pending" },
-      { step: 6, title: "Build a Taxable Brokerage", desc: "Once you've maxed tax-advantaged accounts (big milestone!), open a regular brokerage account. Simple total stock market index fund. No fancy picks needed. This gives you money that's accessible anytime — no age restrictions.", target: 0, current: 0, monthly: 100, months: 0, date: "~2034+", status: "pending" }
-    ],
-    projections: [
-      { year: 2026, netWorth: -28600 },
-      { year: 2027, netWorth: -24000 },
-      { year: 2028, netWorth: -18500 },
-      { year: 2029, netWorth: -12000 },
-      { year: 2030, netWorth: -4500 },
-      { year: 2031, netWorth: 5000 },
-      { year: 2032, netWorth: 16000 },
-      { year: 2033, netWorth: 29000 },
-      { year: 2034, netWorth: 44000 },
-      { year: 2035, netWorth: 62000 }
-    ]
+    assets: { homeValue: 0, retirementBalance: 0 }
   },
   {
     id: 6, name: "Tasha Moore", age: 30, ini: "TM", bg: "#fce4ec", fg: "#880e4f",
     nick: "The New Member", emoji: "👩🏾‍🎨",
     job: "Marketing Coordinator", status: "Unknown", hh: null, inc: 52000, own: false,
     debt: { "Credit Card": 4500 },
+    debtRates: { "Credit Card": 0.25 },
     accs: ["Checking"],
-    goals: ["Get my finances together"],
-    sub: "New client · $52K · Incomplete profile",
+    goals: [],
+    matchAccess: 'unknown',
+    sub: "Just signed up — profile incomplete · 30",
     bio: "Tasha recently signed up after a friend recommended the service. She shared her income, job title, and one credit card balance, but hasn't completed her full financial intake yet. We don't have details on her savings, investments, household size, risk tolerance, or long-term goals.",
     suitability: {
       riskTolerance: "Unknown",
@@ -667,9 +609,7 @@ const PROFILES = [
       employmentStability: "Unknown",
       accreditedInvestor: "Unknown",
       specialCircumstances: "Incomplete profile — many fields missing"
-    },
-    gameplan: [],
-    projections: []
+    }
   }
 ];
 
@@ -685,7 +625,7 @@ function getProfileCompleteness(p) {
     p.own !== null ? 'yes' : null,
     Object.keys(p.debt).length > 0 ? 'yes' : null,
     p.accs.length > 0 ? 'yes' : null,
-    p.goals.length > 0 && p.goals[0] !== 'Get my finances together' ? 'yes' : null,
+    p.goals.length > 0 ? 'yes' : null,
     p.bio && !p.bio.includes("hasn't completed") ? 'yes' : null,
     p.suitability.riskTolerance !== 'Unknown' ? 'yes' : null,
     p.suitability.investmentExperience !== 'Unknown' ? 'yes' : null,
@@ -702,7 +642,7 @@ function getProfileCompleteness(p) {
     p.suitability.hasDisabilityInsurance !== 'Unknown' ? 'yes' : null,
     p.suitability.hasEstatePlan !== 'Unknown' ? 'yes' : null,
     p.suitability.employmentStability !== 'Unknown' ? 'yes' : null,
-    p.gameplan.length > 0 ? 'yes' : null,
+    hasGameplan(p) ? 'yes' : null,
   ];
   const filled = fields.filter(f => f !== null && f !== undefined).length;
   return Math.round((filled / fields.length) * 100);
@@ -870,7 +810,13 @@ function renderCard(p) {
   const pctBg = pct === 100 ? '#d4e8dc' : pct >= 70 ? '#fef5d4' : '#fde8e8';
   const pctBarColor = pct === 100 ? '#CC6600' : pct >= 70 ? '#f0c040' : '#e74c3c';
   const debtRows = Object.entries(p.debt)
-    .map(([k, v]) => `<div class="stat"><div class="stat-label">${k}</div><div class="stat-val">${fmt(v)}</div></div>`)
+    .map(([k, v]) => {
+      const r = p.debtRates && p.debtRates[k];
+      const rateTag = r != null
+        ? `<span style="text-transform:none;letter-spacing:0;color:#a89d85;font-weight:400" title="Assumed rate — actual rate would be collected at intake">· ${(r*100).toFixed(0)}% ⓘ</span>`
+        : '';
+      return `<div class="stat" ${r != null ? 'style="cursor:help"' : ''}><div class="stat-label">${k} ${rateTag}</div><div class="stat-val">${fmt(v)}</div></div>`;
+    })
     .join('');
 
   // Find missing fields for incomplete profiles
@@ -918,31 +864,29 @@ function renderCard(p) {
       <div class="section-label" style="margin-top:10px">Background</div>
       <div class="bio-text">${p.bio}</div>
       <div class="stats-grid">
-        <div class="stat"><div class="stat-label">Annual Income</div><div class="stat-val">${fmt(p.inc)}</div></div>
+        <div class="stat" title="All projections assume a 3% annual raise. Fixed assumption — not editable yet." style="cursor:help"><div class="stat-label">Annual Income <span style="text-transform:none;letter-spacing:0;color:#a89d85;font-weight:400">· +3%/yr ⓘ</span></div><div class="stat-val">${fmt(p.inc)}</div></div>
         <div class="stat"><div class="stat-label">Total Debt</div><div class="stat-val">${fmt(debtTotal(p))}</div></div>
         ${debtRows}
       </div>
       <div class="section-label">Accounts</div>
       <div style="margin-bottom:9px">${p.accs.map(a => `<span class="tag">${a}</span>`).join('')}</div>
-      <div class="section-label">Goals</div>
-      ${p.goals.map(g => `<div class="goal-item"><div class="goal-dot"></div><span style="font-size:11px;color:#4a4a4a">${g}</span></div>`).join('')}
-      ${p.subGoals && p.subGoals.length > 0 ? `
-        <div class="section-label" style="margin-top:12px">Sub-goals <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#8b7355;font-size:10px">· toggle to see impact</span></div>
-        ${p.subGoals.map(sg => {
-          const on = getEffectiveEnabled(p, sg);
+      ${p.goals && p.goals.length > 0 ? `
+        <div class="section-label">Goals <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#8b7355;font-size:10px">· toggle on/off to see impact</span></div>
+        ${p.goals.map(g => {
+          const on = getEffectiveEnabled(p, g);
           return `
-            <div onclick="toggleSubGoal(${p.id}, '${sg.id}')" style="display:flex;align-items:center;gap:10px;padding:7px 9px;background:${on ? '#f3f9f6' : '#faf8f4'};border:1px solid ${on ? '#a8d4c2' : '#e8e3d8'};border-radius:7px;cursor:pointer;margin-bottom:4px;transition:all 0.15s">
+            <div onclick="toggleGoal(${p.id}, '${g.id}')" style="display:flex;align-items:center;gap:10px;padding:7px 9px;background:${on ? '#f3f9f6' : '#faf8f4'};border:1px solid ${on ? '#a8d4c2' : '#e8e3d8'};border-radius:7px;cursor:pointer;margin-bottom:4px;transition:all 0.15s">
               <div style="width:28px;height:16px;background:${on ? '#022e21' : '#c9c2b4'};border-radius:8px;position:relative;flex-shrink:0;transition:background 0.2s">
                 <div style="width:12px;height:12px;background:#fff;border-radius:50%;position:absolute;top:2px;left:${on ? '14px' : '2px'};transition:left 0.2s"></div>
               </div>
               <div style="flex:1;min-width:0">
-                <div style="font-size:11px;font-weight:500;color:#022e21">${sg.name}</div>
-                <div style="font-size:10px;color:#8b7355;margin-top:1px">${sg.desc} · <strong>${formatSubGoalCost(sg)}</strong></div>
+                <div style="font-size:11px;font-weight:500;color:#022e21">${g.name}</div>
+                <div style="font-size:10px;color:#8b7355;margin-top:1px">${g.desc ? g.desc + ' · ' : ''}<strong>${formatGoalCost(g)}</strong></div>
               </div>
             </div>
           `;
         }).join('')}
-      ` : ''}
+      ` : '<div class="section-label">Goals</div><div style="font-size:11px;color:#8b7355;font-style:italic">No personal goals on file beyond the priority order.</div>'}
       <div class="suit-section">
         <div class="section-label">Suitability Review</div>
         <div class="suit-grid">
@@ -965,10 +909,10 @@ function renderCard(p) {
           ${s.specialCircumstances !== 'None' ? `<div class="suit-item full"><div class="suit-label">Special Circumstances</div><div class="suit-val flag">${s.specialCircumstances}</div></div>` : ''}
         </div>
       </div>
-      ${p.gameplan.length > 0
+      ${hasGameplan(p)
         ? `<button class="gp-open-btn" onclick="openGameplan()">View Financial Gameplan →</button>`
         : `<div style="background:#fff5f5;border:1px solid #fecaca;border-radius:8px;padding:10px 12px;margin-top:10px;font-size:11px;color:#991b1b;text-align:center">
-            <strong>No gameplan available</strong> — Complete the member's profile to generate a personalized financial plan.
+            <strong>No gameplan available</strong> — Complete the member's profile (need monthly expenses) to generate a personalized financial plan.
            </div>`}
     </div>`;
 }
@@ -1024,7 +968,7 @@ function getSuggestions(p) {
   const qs = [];
   if (Object.keys(p.debt).length > 0) qs.push("What's the best way to pay off my debt?");
   else qs.push("How should I start investing?");
-  if (p.goals.length > 0) qs.push(`How do I achieve my goal: ${p.goals[0]}?`);
+  if (p.goals.length > 0) qs.push(`How do I achieve my goal: ${p.goals[0].name}?`);
   qs.push("Help me set up a paycheck automation system");
   qs.push("What should my top financial priority be right now?");
   return qs.slice(0, 4);
@@ -1063,19 +1007,22 @@ function renderChat() {
   const area = document.getElementById('chatArea');
   if (!current) {
     area.innerHTML = `<div class="no-profile">
-      <div style="font-size:48px;margin-bottom:4px;animation:wave 2s ease-in-out infinite">👋</div>
-      <div style="font-weight:600;color:#022e21;font-size:16px">Welcome to Wealth Box</div>
-      <div style="max-width:280px;text-align:center;line-height:1.5">Select a member profile or add your own to start a personalized AI financial session</div>
-      <div style="margin-top:24px;display:flex;align-items:center;gap:14px">
-        <span style="font-size:54px;line-height:1;color:#022e21;animation:nudge 1.5s ease-in-out infinite">&larr;</span>
-        <div style="text-align:left">
-          <div style="font-size:13px;color:#022e21;font-weight:600">Pick one from the list</div>
-          <div style="font-size:11px;color:#8b7355">or hit &ldquo;+ Add&rdquo; at the top</div>
-        </div>
+      <div class="arc-hero">
+        <h1>Built for the ones catching the entire family.</h1>
+        <p>AI financial advice that gets the math <em>and</em> the family dynamics. Pick a member to see what a real plan looks like for someone in their situation.</p>
       </div>
+      <div class="arc-stage" id="arcStage" onmouseenter="pauseArc()" onmouseleave="resumeArc()"></div>
+      <div class="arc-nav">
+        <button class="arc-arrow" onclick="arcAdvance(-1); resetArcInterval()" aria-label="Previous">&lsaquo;</button>
+        <div class="arc-dots" id="arcDots"></div>
+        <button class="arc-arrow" onclick="arcAdvance(1); resetArcInterval()" aria-label="Next">&rsaquo;</button>
+      </div>
+      <div class="arc-foot">Tap a card to chat with their AI advisor — or hit <strong>+ Add</strong> in the sidebar to load your own profile.</div>
     </div>`;
+    startArc();
     return;
   }
+  stopArc();
   const p = current;
   const suggs = getSuggestions(p);
   area.innerHTML = `
@@ -1156,18 +1103,27 @@ async function sendMessage(text) {
 
   /* ── SYSTEM PROMPT — controls how Claude responds ── */
   const pct = getProfileCompleteness(p);
-  const enabledSubs = enabledSubGoals(p);
-  const subGoalsBlock = enabledSubs.length === 0 ? '' : `
+  const enabledList = enabledGoals(p);
+  const goalsBlock = enabledList.length === 0 ? `
 
-ADDITIONAL FINANCIAL COMMITMENTS — sub-goals the member has currently turned ON:
-${enabledSubs.map(sg => `- ${sg.name}: ${sg.cadence === 'monthly' ? '$' + sg.cost.toLocaleString() + '/mo ongoing' : '$' + sg.cost.toLocaleString() + ' (' + sg.horizon + ')'} — ${sg.desc}`).join('\n')}
+ENABLED GOALS: None on file. Plan = the canonical priority order only.` : `
 
-These are commitments the member has chosen to layer on top of their primary goals. When advising:
-- Factor them into cash-flow math and savings timelines. Don't ignore them.
-- Be honest if they conflict with core priorities like emergency fund or high-interest debt. Show the tradeoff with real numbers.
-- These often surface sandwich-generation or boundaries tensions — supporting parents/siblings while building your own future. When that's the dynamic, name it honestly and gently.
-- Do NOT moralize about whether to keep the commitment. That's the member's call. Show the impact and let them decide.
-- Sub-goals NOT in this list have been turned OFF by the member. Don't mention them.`;
+ENABLED GOALS — what the member has currently turned ON (toggleable; OFF goals are intentionally excluded — don't mention them):
+${enabledList.map(g => {
+  const slot = g.slot === 'floor' ? 'FLOOR (survival commitment, slots in priority list before high-interest debt)' : 'PARALLEL (runs alongside other parallel goals after the floor)';
+  const moneyTag = g.cadence === 'monthly'
+    ? `$${g.amount.toLocaleString()}/mo ongoing`
+    : `$${g.amount.toLocaleString()} target by ${g.targetYear || 'unspecified'}`;
+  const rateTag = g.kind === 'debt' && g.interestRate ? ` @ ${(g.interestRate*100).toFixed(0)}% interest` : '';
+  const savedTag = g.currentSaved ? ` (already $${g.currentSaved.toLocaleString()} saved)` : '';
+  return `- ${g.name} [${slot}] — ${moneyTag}${rateTag}${savedTag}. ${g.desc || ''}`.trim();
+}).join('\n')}
+
+How to use this list:
+- Floor goals slot into the priority order between emergency fund and high-interest debt. Treat them as non-negotiable monthly commitments (they consume cash before discretionary investing).
+- Parallel goals share the remaining monthly cash AFTER the floor is satisfied. Allocate proportionally to deadlines — earlier deadlines + bigger gaps need more.
+- Always do the timeline math: given current cash flow, 3% annual raises, and the goals' target years, can the member hit them all? If not, name the shortfall and the three levers (earn more, change goals, spend less).
+- These goals often surface sandwich-generation or boundaries tensions. Name it honestly and gently when relevant. Don't moralize about whether to keep the commitment — that's the member's call.`;
   const systemPrompt = `You are a knowledgeable, empathetic AI financial advisor for Wealth Box. Your job is to give this specific member personalized, actionable financial guidance based on their exact financial situation.
 
 RESPONSE FORMAT — FOLLOW THESE RULES IN EVERY SINGLE RESPONSE. NON-NEGOTIABLE:
@@ -1248,10 +1204,12 @@ MEMBER PROFILE:
 - Household Size: ${p.hh ?? 'Unknown'}
 - Annual Income: ${fmt(p.inc)}
 - Homeowner: ${p.own ? 'Yes' : 'No'}
-- Debt: ${Object.entries(p.debt).map(([k, v]) => `${k}: ${fmt(v)}`).join(', ')} | Total: ${fmt(debtTotal(p))}
+- Debt: ${Object.entries(p.debt).map(([k, v]) => {
+    const r = p.debtRates && p.debtRates[k];
+    return `${k}: ${fmt(v)}${r ? ' @ ' + (r*100).toFixed(0) + '% (assumed)' : ''}`;
+  }).join(', ')} | Total: ${fmt(debtTotal(p))}
 - Accounts: ${p.accs.join(', ')}
-- Financial Goals: ${p.goals.join('; ')}
-- Background Story: ${p.bio}${subGoalsBlock}
+- Background Story: ${p.bio}${goalsBlock}
 
 SUITABILITY REVIEW (MUST CHECK BEFORE EVERY RECOMMENDATION):
 - Risk Tolerance: ${p.suitability.riskTolerance}
@@ -1272,18 +1230,49 @@ SUITABILITY REVIEW (MUST CHECK BEFORE EVERY RECOMMENDATION):
 - Accredited Investor: ${p.suitability.accreditedInvestor}
 - Special Circumstances: ${p.suitability.specialCircumstances}
 
-PRIORITY ORDER FOR MONEY DECISIONS (follow this exact sequence when advising):
-1. Emergency Fund — 3-6 months of expenses in a HYSA. Non-negotiable first step.
-2. 401(k) Employer Match — contribute just enough to capture the full match. It's free money with a deadline.
-3. High-Interest Debt (9%+) — credit cards, personal loans. Costs more than the market returns. Attack aggressively.
-4. HSA (if eligible) — triple tax advantage: deductible now, grows tax-free, tax-free for medical. After 65 it's a bonus IRA.
-5. Roth IRA — after-tax money in, grows tax-free, comes out tax-free. $7,000/yr limit (2025). Essential for long-term wealth.
-6. Max 401(k) — go back and push to the $23,500/yr cap. Roth 401(k) preferred if available.
-7. Mega Backdoor Roth — if their plan allows after-tax contributions + in-plan conversion. Advanced but powerful.
-8. Taxable Brokerage — low-cost index funds, tax-efficient. No contribution limits, no age restrictions.
-9. 529 Plans (if kids) — fund education savings AFTER retirement is on track. You can borrow for college, not retirement.
+PRIORITY ORDER FOR MONEY DECISIONS — two zones:
 
-IMPORTANT: If a member asks about a later step (e.g., "should I max my 401(k)?") but hasn't completed earlier steps (e.g., no emergency fund, high CC debt), redirect them to the earlier priority FIRST and explain WHY.
+FLOOR (sequential, do these in order before anything else):
+1. Employer Match (401(k), 403(b), 401(a)) — #1 ONLY IF they have access. Three cases:
+   - Confirmed match available: put it at #1, contribute just enough to capture the full match. Free money with a deadline.
+   - Unknown / not in their data: still treat as #1, but tell them to verify with HR — confirm the plan exists AND get the match formula. Never assume there isn't one.
+   - Confirmed NO match (self-employed without Solo 401(k) match equivalent, or employer doesn't offer one): drop this step. Emergency fund becomes #1.
+2. Emergency Fund — 3-6 months of expenses in a HYSA.
+3. Active FLOOR Goals (when toggled on, slot='floor') — typically survival commitments like a monthly remittance to family. Real recurring obligations that must be funded before discretionary debt payoff and investing.
+4. High-Interest Debt (9%+ APR) — credit cards, personal loans. Costs more than the market returns. Attack aggressively. (CC default is assumed 25% in this demo.)
+
+PARALLEL (concurrent — split the remaining monthly cash across all of these at the same time, sized to each goal's deadline. These items have annual caps or fixed timelines, so deferring them is "use it or lose it"):
+- Active PARALLEL Goals (slot='parallel') the member has toggled on — debt payoff at sub-9% rates (student loans 6% assumed, mortgage 4%, car 6%, business loan 7%), home downpayment, family help, FIRE number, etc.
+- HSA (if eligible) — triple tax advantage; annual cap is use-it-or-lose-it.
+- Roth IRA — $7,000/yr cap (2025); skip a year and that year's tax-free room is gone forever.
+- 529 Plans (if kids) — kids age into college on a fixed timeline; each skipped year is one less year of compounding.
+
+How to think about the parallel block: don't max one item before starting the next. Allocate monthly contributions across all parallel goals based on (1) deadline urgency, (2) gap remaining, and (3) tax efficiency. A 2032 college goal needs more per month than a 2046 retirement goal even if the dollar target is similar.
+
+SURPLUS (only fund these AFTER the parallel block is on track — these have no annual caps or fixed deadlines, so they're where leftover cash goes):
+- Max 401(k) toward $23,500/yr cap (above the match). The match itself is in the FLOOR; the rest is surplus because it competes with near-term goals and has no use-it-or-lose-it pressure beyond the match.
+- Mega Backdoor Roth — if their plan allows after-tax contributions + in-plan conversion. Powerful but only relevant once the parallel block is funded and they have meaningful slack.
+- Taxable Brokerage — low-cost index funds, tax-efficient. No tax advantage, no cap, no deadline — the catch-all for excess.
+
+IMPORTANT: If a member asks about a SURPLUS step (e.g., "should I max my 401(k)?") but hasn't met the parallel block (e.g., still short on the home downpayment timeline), redirect them — putting more into a 401(k) above the match while a 2032 college goal is short means they're picking the wrong order. The match alone (in the floor) is non-negotiable; max-401(k) above the match isn't. Same logic for taxable brokerage. Within the parallel block, all items run concurrently — don't gatekeep one parallel goal behind another.
+
+INCOME GROWTH ASSUMPTION — apply this to every projection:
+- Assume the member continues working and gets a **3% raise per year**. This is a fixed assumption (not editable yet).
+- When you do multi-year math, grow income at 3% annually. Their available cash for goals grows alongside it.
+- Mention the assumption when it's load-bearing in your math, e.g., "Assuming your 3% annual raises hold, by 2030 you'll have an extra $X/mo to put toward this."
+
+TIMELINE MATH — size goals to the years they actually have:
+After the priority floor (match → emergency fund → active sub-goals → high-interest debt), the member's stated goals (house, retire by X, kids' college, etc.) should be funded based on their actual deadlines — not maxed out blindly.
+
+How to think about it:
+- Pull each goal's target year and target amount. If a goal doesn't have a year, ask for one.
+- For each goal, compute the rough monthly contribution needed: divide the gap by months remaining, adjust for assumed return (use 7% for invested long-term goals, 4% for HYSA/short-term, 0% for debt payoff).
+- Sum all the monthly contributions needed. Compare to their estimated monthly cash available after expenses + sub-goal commitments.
+- If they can hit all goals: say so plainly, show each monthly number, and tell them what's left over.
+- If they CAN'T hit all goals: be honest. Lay out the three levers — **earn more, change goals (push the date out, lower the amount, or drop a goal), or spend less.** Quantify it: "to hit all three on your timeline, you need roughly **$X more per year** in income, OR push the house to **20XX**, OR cut **$Y/mo** from spending. Usually it's some mix."
+- DON'T moralize. The member chose these goals. Your job is to show the math and let them decide which lever(s) to pull.
+
+Example framing for a shortfall: "Here's the honest read: with your current income, expenses, and goals, you're about **$8,000/yr short** of hitting the house downpayment by 2032 AND retiring at 60. Three ways to close that gap: (1) **earn ~$11K more/yr** (raise, side income, switch jobs), (2) push the **house to 2034** (cuts the monthly need by **$X**), or (3) cut **$650/mo** from spending. Which feels most realistic to you?"
 
 COMPLIANCE RULES — follow these before giving any recommendation:
 1. NEVER recommend investments that exceed the member's stated risk tolerance
@@ -1417,6 +1406,460 @@ WHAT TO INCLUDE:
 }
 
 /* ─────────────────────────────────────────
+   GAMEPLAN MATH HELPERS
+───────────────────────────────────────── */
+const CURRENT_YEAR = 2026;            // matches the demo's "today"
+const RAISE_RATE = 0.03;              // assumed annual raise
+const RETURN_RATE_INVEST = 0.08;      // long-term investing default (8%)
+const RETURN_RATE_CASH = 0.03;        // emergency fund + short-term cash savings (3%)
+const RETURN_RATE_HOME = 0.03;        // nominal home appreciation (3%)
+
+/* Effective take-home rate from a marginal tax bracket string like "22%". Rough but defensible. */
+function estimateTakeHomeRate(taxBracket) {
+  if (!taxBracket || taxBracket === 'Unknown') return 0.78;
+  const m = String(taxBracket).match(/(\d+)/);
+  if (!m) return 0.78;
+  const marginal = parseInt(m[1], 10) / 100;
+  // Effective fed income tax ~70% of marginal, plus 7.65% payroll, plus ~5% state estimate.
+  const effective = marginal * 0.7 + 0.0765 + 0.05;
+  return Math.max(0.55, 1 - effective);
+}
+
+/* Estimated monthly cash available after taxes, expenses, and active monthly survival goals. */
+function estimateMonthlyAvailable(p) {
+  if (!p.suitability || p.suitability.monthlyExpenses == null) return null;
+  const takeHomeRate = estimateTakeHomeRate(p.suitability.taxBracket);
+  const monthlyTakeHome = (p.inc * takeHomeRate) / 12;
+  const monthlyExpenses = p.suitability.monthlyExpenses;
+  const monthlyGoalCommit = enabledGoals(p)
+    .filter(g => g.cadence === 'monthly')
+    .reduce((s, g) => s + g.amount, 0);
+  return monthlyTakeHome - monthlyExpenses - monthlyGoalCommit;
+}
+
+/* Monthly contribution needed to hit a goal by its target year.
+   - debt: loan amortization formula (PMT = P·i / (1−(1+i)^−n)) using interestRate
+   - cash/invest: solve PMT for FV target, accounting for currentSaved growth
+   - monthly cadence: returns the monthly cost (it's already a monthly commitment)
+*/
+function computeMonthlyNeeded(goal, currentYear) {
+  if (goal.cadence === 'monthly') return goal.amount;
+  const yearsRemaining = (goal.targetYear || 0) - currentYear;
+  if (yearsRemaining <= 0) return null;
+  const months = Math.round(yearsRemaining * 12);
+
+  if (goal.kind === 'debt') {
+    const principal = (goal.amount || 0) - (goal.currentSaved || 0);
+    if (principal <= 0) return 0;
+    const i = (goal.interestRate || 0) / 12;
+    if (i === 0) return principal / months;
+    return (principal * i) / (1 - Math.pow(1 + i, -months));
+  }
+
+  const annualReturn = goal.kind === 'invest' ? RETURN_RATE_INVEST : RETURN_RATE_CASH;
+  const m = Math.pow(1 + annualReturn, 1/12) - 1;
+  const fvCurrent = (goal.currentSaved || 0) * Math.pow(1 + m, months);
+  const gap = goal.amount - fvCurrent;
+  if (gap <= 0) return 0;
+  return (gap * m) / (Math.pow(1 + m, months) - 1);
+}
+
+/* True if we have enough data to build a meaningful gameplan. */
+function hasGameplan(p) {
+  return !!(p && p.inc && p.suitability && p.suitability.monthlyExpenses != null);
+}
+
+/* Standard amortization term per debt type (months). Used to compute baseline monthly
+   payments for natural payoff. Matches typical real-world loan structures. */
+function defaultTermMonths(debtName) {
+  const lower = (debtName || '').toLowerCase();
+  if (lower.includes('mortgage')) return 360;     // 30-year
+  if (lower.includes('student'))  return 120;     // 10-year
+  if (lower.includes('business')) return 84;      // 7-year SBA-style
+  if (lower.includes('car'))      return 60;      // 5-year
+  if (lower.includes('credit'))   return 60;      // 5-year generous baseline (real CC mins are lower; this gives natural payoff)
+  return 60;
+}
+
+/* Live net-worth simulation. Re-runs every time goals toggle.
+   Model — net worth = cash + invest + home value − all debt:
+   - Cash bucket grows 3% (emergency fund + short-term cash savings).
+   - Invest bucket grows 8% (retirement + brokerage + invest-kind goal balances).
+   - Home value grows 3% nominal (homeowners only).
+   - Per-debt balances accrue interest at their own rate; principal pays down via amortized
+     payments when the debt is HID (floor) or has a parallel goal attached.
+   - Each year: gross income grows 3%; take-home derived from tax bracket; expenses + monthly
+     survival goals deducted; remaining "pool" allocated through priority zones.
+   - Floor: top off emergency fund (toward 6mo expenses), high-interest debts at 24-mo amortization.
+   - Parallel: per-goal monthly need from computeMonthlyNeeded + canonical Roth IRA, pro-rated
+     when total need exceeds the remaining pool.
+   - Surplus: leftover routes to invest (max-401k + brokerage).
+   - Debts not attacked (no parallel goal, not HID): assumed on interest-only minimum payments
+     via the expense line, so balance stays flat year-over-year.
+   Returns [{year, netWorth}, ...] for the next 10 years inclusive. */
+function simulateNetWorth(p) {
+  if (!hasGameplan(p)) return [];
+  const startYear = CURRENT_YEAR;
+  const endYear = startYear + 9;
+  const ROTH_ANNUAL = 7000;
+
+  const expensesMonthly = p.suitability.monthlyExpenses;
+  const efMatch = (p.suitability.emergencyFund || '').match(/(\d+(\.\d+)?)/);
+  const efMonths = efMatch ? parseFloat(efMatch[1]) : 0;
+  const efTarget = expensesMonthly * 6;
+
+  let cash = expensesMonthly * efMonths;
+  const liquidExtra = Math.max(0, (p.suitability.liquidNetWorth || 0) - cash);
+  const retirementStart = (p.assets && p.assets.retirementBalance) || 0;
+  let invest = liquidExtra + retirementStart;
+  let homeValue = (p.assets && p.assets.homeValue) || 0;
+
+  // Split monthlyExpenses into a non-debt portion (constant: rent, food, utilities) and
+  // a debt-baseline portion (sum of each loan's standard amortized minimum). When a loan
+  // naturally pays off (per its term) or gets accelerated to zero, its baseline drops out
+  // of expenses → cash pool grows → freed cash automatically flows to the next priority.
+  const initialBaselineMonthly = debts.reduce((s, d) => s + d.baselinePmt, 0);
+  const nonDebtExpensesMonthly = Math.max(0, expensesMonthly - initialBaselineMonthly);
+
+  function amortPMT(balance, rate, monthsLeft) {
+    if (balance <= 0 || monthsLeft <= 0) return 0;
+    const i = rate / 12;
+    if (i === 0) return balance / monthsLeft;
+    return (balance * i) / (1 - Math.pow(1 + i, -monthsLeft));
+  }
+
+  const debts = Object.entries(p.debt || {}).map(([name, balance]) => {
+    const rate = (p.debtRates && p.debtRates[name]) || 0;
+    const term = defaultTermMonths(name);
+    const baselinePmt = amortPMT(balance, rate, term);  // standard min payment per loan term
+    return { name, balance, rate, isHID: rate >= 0.09, linkedGoal: null, term, baselinePmt };
+  });
+
+  const enabled = enabledGoals(p);
+  enabled.filter(g => g.kind === 'debt' && g.slot !== 'floor').forEach(g => {
+    const debt = debts.find(d =>
+      g.name.toLowerCase().includes(d.name.toLowerCase()) ||
+      d.name.toLowerCase().includes(g.name.toLowerCase().replace('pay off ', '').replace('pay down ', ''))
+    );
+    if (debt) debt.linkedGoal = g;
+  });
+
+  const parallelNonDebtGoals = enabled.filter(g =>
+    g.slot !== 'floor' && g.kind !== 'debt' && g.cadence !== 'monthly'
+  );
+  const monthlyCommit = enabled.filter(g => g.cadence === 'monthly').reduce((s, g) => s + g.amount, 0);
+  const takeHomeRate = estimateTakeHomeRate(p.suitability.taxBracket);
+
+  function applyAnnualPayment(balance, rate, annualPayment) {
+    const i = rate / 12;
+    if (i === 0) return Math.max(0, balance - annualPayment);
+    const pmt = annualPayment / 12;
+    const residual = balance * Math.pow(1 + i, 12) - pmt * (Math.pow(1 + i, 12) - 1) / i;
+    return Math.max(0, residual);
+  }
+
+  const projections = [];
+  const startTotalDebt = debts.reduce((s, d) => s + d.balance, 0);
+  projections.push({ year: startYear, netWorth: Math.round(cash + invest + homeValue - startTotalDebt) });
+
+  for (let year = startYear + 1; year <= endYear; year++) {
+    const yearsElapsed = year - startYear;
+    const grossIncome = p.inc * Math.pow(1 + RAISE_RATE, yearsElapsed);
+    const monthlyTakeHome = (grossIncome * takeHomeRate) / 12;
+    // Effective expenses include only baselines for ACTIVE debts. Once a loan's balance
+    // hits 0, its baseline drops out and that cash is freed.
+    const activeBaselineMonthly = debts.filter(d => d.balance > 0).reduce((s, d) => s + d.baselinePmt, 0);
+    const effectiveExpensesMonthly = nonDebtExpensesMonthly + activeBaselineMonthly;
+    const monthlyPool = Math.max(0, monthlyTakeHome - effectiveExpensesMonthly - monthlyCommit);
+    let annualPool = monthlyPool * 12;
+
+    // Floor: emergency fund top-off (spread shortfall over ~2 yrs, min $2400/yr if any gap)
+    const efGap = Math.max(0, efTarget - cash);
+    if (efGap > 0 && annualPool > 0) {
+      const efContribution = Math.min(annualPool, Math.max(efGap / 2, 2400));
+      cash += efContribution;
+      annualPool -= efContribution;
+    }
+
+    // Floor: high-interest debts. Baseline amortization is paid via the expense line.
+    // Cash pool funds the EXTRA principal needed to hit the accelerated 24-mo target.
+    debts.filter(d => d.isHID && d.balance > 0).forEach(d => {
+      const targetPmt = amortPMT(d.balance, d.rate, 24);
+      const extraMonthlyNeeded = Math.max(0, targetPmt - d.baselinePmt);
+      const extraAnnualNeeded = extraMonthlyNeeded * 12;
+      const actualExtraAnnual = Math.min(annualPool, extraAnnualNeeded);
+      const totalAnnualPayment = (d.baselinePmt * 12) + actualExtraAnnual;
+      d.balance = applyAnnualPayment(d.balance, d.rate, totalAnnualPayment);
+      annualPool -= actualExtraAnnual;
+    });
+
+    // Non-attacked, non-HID debts: just apply the baseline payment from expenses.
+    // Balance pays down naturally per the loan's standard amortization term.
+    debts.filter(d => !d.isHID && !d.linkedGoal && d.balance > 0).forEach(d => {
+      d.balance = applyAnnualPayment(d.balance, d.rate, d.baselinePmt * 12);
+    });
+
+    // Parallel: pro-rated allocation. For debt goals, the EXTRA above baseline competes
+    // for cash pool dollars; baseline stays in expenses.
+    const parallelNeeds = [];
+    parallelNonDebtGoals.forEach(g => {
+      const need = computeMonthlyNeeded(g, year);
+      if (need && need > 0) parallelNeeds.push({ kind: g.kind, monthlyPoolDraw: need });
+    });
+    debts.filter(d => d.linkedGoal && !d.isHID && d.balance > 0).forEach(d => {
+      const monthsLeft = Math.max(1, (d.linkedGoal.targetYear - year) * 12);
+      const targetPmt = amortPMT(d.balance, d.rate, monthsLeft);
+      const extraMonthly = Math.max(0, targetPmt - d.baselinePmt);
+      parallelNeeds.push({ kind: 'debt', monthlyPoolDraw: extraMonthly, debt: d });
+    });
+    parallelNeeds.push({ kind: 'invest', monthlyPoolDraw: ROTH_ANNUAL / 12 }); // canonical Roth IRA
+
+    const totalPoolDrawAnnual = parallelNeeds.reduce((s, n) => s + n.monthlyPoolDraw, 0) * 12;
+    const proRate = totalPoolDrawAnnual > 0 ? Math.min(1, annualPool / totalPoolDrawAnnual) : 0;
+
+    parallelNeeds.forEach(n => {
+      const annual = n.monthlyPoolDraw * 12 * proRate;
+      if (n.kind === 'invest') invest += annual;
+      else if (n.kind === 'cash') cash += annual;
+      else if (n.kind === 'debt') {
+        // Total payment = baseline (from expenses) + extra (from pool, pro-rated)
+        const totalAnnualPayment = (n.debt.baselinePmt * 12) + annual;
+        n.debt.balance = applyAnnualPayment(n.debt.balance, n.debt.rate, totalAnnualPayment);
+      }
+    });
+    annualPool -= totalPoolDrawAnnual * proRate;
+
+    // Surplus → invest
+    if (annualPool > 0) invest += annualPool;
+
+    // Bucket growth
+    cash *= 1 + RETURN_RATE_CASH;
+    invest *= 1 + RETURN_RATE_INVEST;
+    homeValue *= 1 + RETURN_RATE_HOME;
+
+    const totalDebt = debts.reduce((s, d) => s + d.balance, 0);
+    projections.push({ year, netWorth: Math.round(cash + invest + homeValue - totalDebt) });
+  }
+
+  return projections;
+}
+
+/* Build the gameplan dynamically from canonical priorities + active goals.
+   Returns step objects shaped like the old hand-authored steps so the existing
+   gp-step rendering keeps working: { step, title, desc, target, current, monthly, date, status }
+   Plus a `zone` field used to insert a divider before the parallel block.
+*/
+function buildDynamicGameplan(p) {
+  if (!hasGameplan(p)) return [];
+  const steps = [];
+  const enabled = enabledGoals(p);
+  const floorGoals = enabled.filter(g => g.slot === 'floor');
+  const parallelGoals = enabled.filter(g => g.slot !== 'floor');
+  const monthlyExp = p.suitability.monthlyExpenses;
+  let n = 1;
+
+  // 1. Employer match (if access yes/unknown)
+  if (p.matchAccess === 'yes') {
+    steps.push({
+      step: n++, zone: 'floor', status: 'active', title: 'Employer Match',
+      desc: `Contribute at least enough to your employer plan to capture the FULL match. This is a guaranteed 100% return on every dollar — and the deadline is every paycheck. If you skip a paycheck's match, that money is gone forever. Choose the Roth option if available so withdrawals are tax-free in retirement. WHY THIS IS #1: nothing else in your plan offers an instant 100% return that expires this fast.`,
+      target: 0, current: 0, monthly: 0, months: 0, date: 'Now — ongoing'
+    });
+  } else if (p.matchAccess !== 'no') {
+    steps.push({
+      step: n++, zone: 'floor', status: 'active', title: 'Verify Employer Match',
+      desc: `Before anything else, call HR or check your benefits portal: do you have access to a 401(k), 403(b), or 401(a) with employer match? If yes, contribute enough to capture the FULL match — it's guaranteed free money with a paycheck-by-paycheck deadline. If your employer offers no match, mark this confirmed and Emergency Fund moves to #1. WHY THIS IS #1: until we know, we have to assume free money is on the table that you're missing.`,
+      target: 0, current: 0, monthly: 0, months: 0, date: 'Verify this week'
+    });
+  }
+
+  // 2. Emergency Fund
+  const efTarget = monthlyExp * 6;
+  const efMatch = (p.suitability.emergencyFund || '').match(/(\d+(\.\d+)?)/);
+  const efMonths = efMatch ? parseFloat(efMatch[1]) : 0;
+  const efCurrent = Math.round(monthlyExp * efMonths);
+  const efDone = efCurrent >= efTarget;
+  const efGap = Math.max(0, efTarget - efCurrent);
+  const efMonthlyContrib = efDone ? 0 : Math.max(200, Math.round(efGap / 24 / 25) * 25);
+  steps.push({
+    step: n++, zone: 'floor', status: efDone ? 'done' : 'active',
+    title: 'Emergency Fund (3–6 months expenses)',
+    desc: `Build $${efTarget.toLocaleString()} (6 months of your $${monthlyExp.toLocaleString()}/mo expenses) in a high-yield savings account at a DIFFERENT bank than checking — the friction makes it harder to touch. You currently have ~$${efCurrent.toLocaleString()} (${p.suitability.emergencyFund}). ${efDone ? 'You\'re fully funded — keep this topped up as expenses grow.' : `Funnel ~$${efMonthlyContrib.toLocaleString()}/mo here until you hit the target (~24 months).`} WHY THIS IS BEFORE EVERYTHING ELSE: without it, any setback (job loss, medical bill, car repair) forces you back into high-interest debt or to cash in investments at the wrong time, undoing years of progress.`,
+    target: efTarget, current: efCurrent, monthly: efMonthlyContrib, months: efDone ? 0 : 24, date: efDone ? '✅ Complete' : '~24 months'
+  });
+
+  // 3. Active floor goals
+  floorGoals.forEach(g => {
+    const moTag = g.cadence === 'monthly' ? `$${g.amount.toLocaleString()}/mo` : `$${g.amount.toLocaleString()}`;
+    steps.push({
+      step: n++, zone: 'floor', status: 'active',
+      title: `${g.name} (${moTag})`,
+      desc: `${g.desc ? g.desc + '. ' : ''}This is a survival commitment you've turned ON — treated as a real recurring obligation, not discretionary. ${g.cadence === 'monthly' ? `It consumes $${g.amount}/mo of your cash flow before any debt payoff or investing.` : ''} WHY THIS IS IN THE FLOOR: it's tied to family survival, not lifestyle. We fund it before discretionary debt and investing because skipping it isn't on the table. The trade-off is real — that's $${g.amount}${g.cadence === 'monthly' ? '/mo' : ''} that can't go to other goals — but it's your call to make and we honor it.`,
+      target: 0, current: 0, monthly: g.cadence === 'monthly' ? g.amount : 0, months: 0, date: g.cadence === 'monthly' ? 'Ongoing' : (g.targetYear ? `By ${g.targetYear}` : 'TBD')
+    });
+  });
+
+  // 4. High-interest debts (>= 9%)
+  if (p.debt && p.debtRates) {
+    Object.entries(p.debt).forEach(([name, amount]) => {
+      const rate = p.debtRates[name];
+      if (rate != null && rate >= 0.09) {
+        const annualInterest = Math.round(amount * rate);
+        const targetMonths = 24;
+        const i = rate / 12;
+        const pmt = Math.round((amount * i) / (1 - Math.pow(1 + i, -targetMonths)));
+        steps.push({
+          step: n++, zone: 'floor', status: 'active',
+          title: `Pay Off ${name} ($${amount.toLocaleString()} @ ${(rate*100).toFixed(0)}%)`,
+          desc: `Your ${name.toLowerCase()} balance of $${amount.toLocaleString()} at ${(rate*100).toFixed(0)}% APR is bleeding ~$${annualInterest.toLocaleString()}/yr in interest alone. That's WAY more than the market returns over the long run, which means every dollar of interest is a dollar stolen from your future wealth. Use the avalanche method — minimum payments on everything else, max payments here. At ~$${pmt.toLocaleString()}/mo you're done in ~24 months. Consider a 0% intro APR balance transfer card to buy yourself a runway. WHY THIS BEATS INVESTING: a guaranteed ${(rate*100).toFixed(0)}% return (the interest you stop paying) beats any reasonable investment return after-tax.`,
+          target: amount, current: 0, monthly: pmt, months: targetMonths, date: '~24 months'
+        });
+      }
+    });
+  }
+
+  // Parallel divider
+  steps.push({ step: null, zone: 'parallel-divider', title: 'Then run these in parallel', desc: '' });
+
+  // 5. Active parallel goals
+  parallelGoals.forEach(g => {
+    const monthlyNeed = computeMonthlyNeeded(g, CURRENT_YEAR);
+    const yearsLeft = g.targetYear ? g.targetYear - CURRENT_YEAR : null;
+    let why;
+    if (g.kind === 'debt') {
+      const annualInterest = Math.round((g.amount - (g.currentSaved || 0)) * (g.interestRate || 0));
+      why = `Pay off $${g.amount.toLocaleString()} at ${((g.interestRate || 0)*100).toFixed(0)}% APR by ${g.targetYear}. Loan amortization works out to ~$${Math.round(monthlyNeed).toLocaleString()}/mo over ${yearsLeft} years. ${g.desc ? g.desc + '. ' : ''}WHY IT'S PARALLEL (NOT FLOOR): below the 9% high-interest threshold, so it doesn't have to be paid off before investing. But it still costs ~$${annualInterest.toLocaleString()}/yr in interest, so we don't ignore it either — it shares cash with your other goals.`;
+    } else if (g.kind === 'invest') {
+      why = `Reach $${g.amount.toLocaleString()} by ${g.targetYear} (${yearsLeft} years out). Assuming 7% annual return on long-term investments${g.currentSaved ? ' and $' + g.currentSaved.toLocaleString() + ' already saved' : ''}, you need ~$${Math.round(monthlyNeed).toLocaleString()}/mo. ${g.desc ? g.desc + '. ' : ''}WHY IT'S PARALLEL: long horizon means time-in-market does the heavy lifting; consistent contributions matter more than front-loading. Slot it alongside other parallel goals and let compound growth work.`;
+    } else if (g.kind === 'cash') {
+      why = `Save $${g.amount.toLocaleString()} by ${g.targetYear} (${yearsLeft} years out) in a HYSA at ~4%${g.currentSaved ? ', with $' + g.currentSaved.toLocaleString() + ' already saved' : ''}. You need ~$${Math.round(monthlyNeed).toLocaleString()}/mo. ${g.desc ? g.desc + '. ' : ''}WHY IT'S PARALLEL: shorter horizon and risk-averse use case (you'll need the cash by a specific date), so HYSA is the right vehicle. Sized to the deadline so it doesn't crowd out longer-term investing.`;
+    } else {
+      why = `Goal: $${g.amount.toLocaleString()} by ${g.targetYear || 'unspecified'}. ${g.desc || ''}`;
+    }
+    steps.push({
+      step: n++, zone: 'parallel', status: 'pending', title: g.name,
+      desc: why, target: g.amount, current: g.currentSaved || 0,
+      monthly: Math.round(monthlyNeed || 0), months: yearsLeft ? yearsLeft * 12 : 0,
+      date: g.targetYear ? `By ${g.targetYear}` : 'TBD'
+    });
+  });
+
+  // 6. Canonical parallel items
+  steps.push({
+    step: n++, zone: 'parallel', status: 'pending', title: 'HSA (if eligible)',
+    desc: `If your employer offers a high-deductible health plan (HDHP) you can pair with an HSA, open one. The HSA is the only account with a TRIPLE tax advantage: contributions are tax-deductible, growth is tax-free, and withdrawals for medical expenses are tax-free. After 65 it works like a bonus IRA (taxed only on non-medical withdrawals). Family limit is $8,550/yr (2025), individual $4,300/yr. Pay medical bills out of pocket and let the HSA invest and compound. WHY IT'S PARALLEL: annual contribution cap is use-it-or-lose-it (skipping a year, that year's room is gone forever), and the math is the most efficient in the tax code. Slot it in alongside other deadline-sensitive items — don't wait for "leftover" cash.`,
+    target: 8550, current: 0, monthly: 0, months: 0, date: 'Annually'
+  });
+  steps.push({
+    step: n++, zone: 'parallel', status: 'pending', title: 'Roth IRA',
+    desc: `Contribute up to $7,000/yr ($8,000 if 50+) to a Roth IRA. After-tax money goes in, grows tax-free for decades, and comes out tax-free in retirement. The trade-off vs. traditional: you pay tax now instead of later. WHY ROTH MAKES SENSE FOR MOST: tax rates are historically low and likely to rise; locking in today's rate is a hedge. If your income exceeds the Roth direct-contribution limit (~$165K single, ~$246K MFJ), use the backdoor Roth method. WHY IT'S PARALLEL (not Surplus): the $7K annual cap is use-it-or-lose-it. Skip a year, that year's tax-free room is gone forever. Treat it as deadline-driven, not "if there's money left."`,
+    target: 7000, current: 0, monthly: 0, months: 0, date: 'Annually'
+  });
+  if (p.suitability.dependents && p.suitability.dependents !== 'None' && p.suitability.dependents !== 'Unknown') {
+    steps.push({
+      step: n++, zone: 'parallel', status: 'pending', title: '529 Plan (kids\' education)',
+      desc: `If you have kids, fund a 529 for each — tax-free growth for qualified education expenses. Many states offer a state income-tax deduction on contributions. WHY IT'S PARALLEL: kids age into college on a fixed timeline you can't slow down. Each year you skip is one less year of compounding before the bill arrives. CAVEAT: you can borrow for college, you can't borrow for retirement — so don't let 529 contributions starve the higher-leverage parallel items above. ${p.suitability.dependents} on file.`,
+      target: 0, current: 0, monthly: 0, months: 0, date: 'Ongoing'
+    });
+  }
+
+  // Surplus divider
+  steps.push({ step: null, zone: 'surplus-divider', title: 'If goals are met and cash is still left over', desc: '' });
+
+  // Surplus items — only relevant after the parallel block is funded
+  steps.push({
+    step: n++, zone: 'surplus', status: 'pending', title: 'Max 401(k) toward $23,500 cap',
+    desc: `Beyond the match, push your total 401(k) contribution toward the $23,500/yr cap (2025). Bumping by 1% each raise is nearly painless and compounds enormously over a career. WHY IT'S SURPLUS (NOT PARALLEL): the urgent piece — the match — is already captured up in the floor. Adding above-match contributions has no paycheck-by-paycheck deadline; it competes for the same dollars as your near-term goals. If you're hitting your parallel goals on time and still have cash, this is where it goes. If you're NOT hitting your parallel goals, putting more here starves them and that's the wrong trade.`,
+    target: 23500, current: 0, monthly: 0, months: 0, date: 'After goals are funded'
+  });
+  steps.push({
+    step: n++, zone: 'surplus', status: 'pending', title: 'Taxable Brokerage',
+    desc: `A regular brokerage account holding low-cost index funds (total US market, total international, maybe some bonds depending on age). No contribution limits, no age restrictions on withdrawal — this is your bridge for goals that don't fit the 59½ retirement-account window (early retirement, sabbaticals, big purchases beyond what your parallel goals already cover). Use tax-efficient ETFs and harvest losses where possible. WHY IT'S SURPLUS: no tax advantage, no annual cap, no deadline. It's the catch-all for excess cash once everything time-sensitive is funded. Funding this while parallel goals are short means you're picking the wrong order.`,
+    target: 0, current: 0, monthly: 0, months: 0, date: 'After goals are funded'
+  });
+
+  return steps;
+}
+
+/* Render the feasibility panel: per-goal monthly need vs estimated available cash.
+   Uses enabled non-survival goals (survival monthly goals are already deducted in estimateMonthlyAvailable). */
+function renderFeasibilityPanel(p) {
+  const enabled = enabledGoals(p);
+  const targetGoals = enabled.filter(g => g.cadence !== 'monthly');
+  if (targetGoals.length === 0) return '';
+  const monthlyAvailable = estimateMonthlyAvailable(p);
+  if (monthlyAvailable == null) return '';
+
+  const rows = targetGoals.map(g => {
+    const need = computeMonthlyNeeded(g, CURRENT_YEAR);
+    return { goal: g, need: need == null ? 0 : need };
+  });
+  const totalNeed = rows.reduce((s, r) => s + r.need, 0);
+  const surplus = monthlyAvailable - totalNeed;
+  const onTrack = surplus >= 0;
+
+  const fmtMo = (n) => '$' + Math.round(n).toLocaleString();
+  const takeHomeRate = estimateTakeHomeRate(p.suitability.taxBracket);
+  const grossMoreYearly = onTrack ? 0 : Math.round((-surplus * 12) / takeHomeRate / 500) * 500;
+  const cutPerMo = onTrack ? 0 : Math.round(-surplus / 25) * 25;
+
+  const monthlyCommits = enabled.filter(g => g.cadence === 'monthly');
+  const monthlyCommitsHtml = monthlyCommits.length === 0 ? '' : `
+    <div style="font-size:10px;color:#8b7355;margin-bottom:8px;font-style:italic">
+      Already deducted from available: ${monthlyCommits.map(g => g.name + ' ($' + g.amount + '/mo)').join(', ')}
+    </div>`;
+
+  const rowsHtml = rows.map(r => {
+    const g = r.goal;
+    const rateTag = g.kind === 'debt' && g.interestRate ? ` @ ${(g.interestRate*100).toFixed(0)}%` : '';
+    const subTag = g.targetYear ? `by ${g.targetYear} · ${fmt(g.amount)}${rateTag}` : `${fmt(g.amount)}${rateTag}`;
+    return `
+      <div style="display:grid;grid-template-columns:1fr auto auto;gap:10px;align-items:center;padding:7px 10px;background:#faf8f4;border-radius:6px;margin-bottom:4px;font-size:11px">
+        <div style="color:#022e21;font-weight:500">${g.name}</div>
+        <div style="color:#8b7355">${subTag}</div>
+        <div style="font-weight:600;color:${onTrack ? '#0a6e4a' : '#9a3412'}">${r.need === 0 ? '✓ on track' : 'needs ' + fmtMo(r.need) + '/mo'}</div>
+      </div>`;
+  }).join('');
+
+  const verdictHtml = onTrack
+    ? `<div style="background:#f3f9f6;border:1px solid #a8d4c2;border-radius:8px;padding:10px 12px;margin-top:10px;font-size:11px;color:#022e21">
+         <strong>✓ All goals fit your timeline.</strong> ~${fmtMo(surplus)}/mo left over after parallel goals are funded — that's the cash that flows into the Surplus zone (max 401(k) toward the cap, taxable brokerage, or accelerate a goal).
+       </div>`
+    : `<div style="background:#fff7ed;border:1px solid #fcd9a8;border-radius:8px;padding:10px 12px;margin-top:10px;font-size:11px;color:#7c2d12;line-height:1.6">
+         <strong>⚠ Shortfall: ${fmtMo(-surplus)}/mo</strong> on your current goals + timelines. Three levers to close it:
+         <div style="margin-top:6px">
+           • Earn <strong>~$${grossMoreYearly.toLocaleString()}/yr more</strong> (raise, side income, switch jobs)<br>
+           • Push out one or more goals (later target year cuts the monthly need)<br>
+           • Cut <strong>~$${cutPerMo.toLocaleString()}/mo</strong> from spending
+         </div>
+         <div style="margin-top:8px;font-style:italic;color:#8b7355">Usually it's a mix. Ask the AI advisor what the realistic path looks like for ${p.name.split(' ')[0]}.</div>
+       </div>`;
+
+  return `
+    <div style="background:#fff;border:1px solid #e8e3d8;border-radius:10px;padding:14px 16px;margin-bottom:14px">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+        <span style="font-size:14px">🎯</span>
+        <strong style="color:#022e21;font-size:13px">Goal Feasibility</strong>
+        <span style="color:#8b7355;font-size:11px">· ${rows.length} target goal${rows.length === 1 ? '' : 's'} active</span>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;font-size:11px">
+        <div style="background:#f8f6f0;border-radius:6px;padding:8px 10px">
+          <div style="color:#8b7355;font-size:10px;text-transform:uppercase;letter-spacing:0.4px;margin-bottom:2px">Available / mo</div>
+          <div style="color:#022e21;font-weight:600;font-size:13px">${fmtMo(monthlyAvailable)}</div>
+        </div>
+        <div style="background:#f8f6f0;border-radius:6px;padding:8px 10px">
+          <div style="color:#8b7355;font-size:10px;text-transform:uppercase;letter-spacing:0.4px;margin-bottom:2px">Total goal need / mo</div>
+          <div style="color:${onTrack ? '#0a6e4a' : '#9a3412'};font-weight:600;font-size:13px">${fmtMo(totalNeed)}</div>
+        </div>
+      </div>
+      ${monthlyCommitsHtml}
+      ${rowsHtml}
+      ${verdictHtml}
+      <div style="font-size:10px;color:#8b7355;margin-top:8px;font-style:italic">Assumes 3% annual raise · 8% return on investing, 3% on emergency fund + cash savings · debt uses loan amortization at the rate shown · take-home rate estimated from tax bracket. Rough math, not a quote.</div>
+    </div>`;
+}
+
+/* ─────────────────────────────────────────
    GAMEPLAN MODAL
 ───────────────────────────────────────── */
 function openGameplan() {
@@ -1424,15 +1867,37 @@ function openGameplan() {
   const p = current;
   document.getElementById('gpTitle').innerHTML = `Financial Gameplan: <span>${p.name}</span>`;
 
-  const stepsHtml = p.gameplan.map(s => {
+  const dynamicSteps = buildDynamicGameplan(p);
+  const stepsHtml = dynamicSteps.map(s => {
+    if (s.zone === 'parallel-divider') {
+      return `
+        <div style="display:flex;align-items:center;gap:10px;margin:18px 0 10px;padding:8px 12px;background:#f3f9f6;border:1px dashed #a8d4c2;border-radius:8px">
+          <span style="font-size:14px">⇄</span>
+          <strong style="color:#022e21;font-size:12px;text-transform:uppercase;letter-spacing:0.5px">${s.title}</strong>
+          <span style="color:#8b7355;font-size:11px;font-style:italic">— split remaining monthly cash across all of these (sized to each deadline)</span>
+        </div>`;
+    }
+    if (s.zone === 'surplus-divider') {
+      return `
+        <div style="display:flex;align-items:center;gap:10px;margin:18px 0 10px;padding:8px 12px;background:#fff7ed;border:1px dashed #fcd9a8;border-radius:8px">
+          <span style="font-size:14px">💰</span>
+          <strong style="color:#7c2d12;font-size:12px;text-transform:uppercase;letter-spacing:0.5px">${s.title}</strong>
+          <span style="color:#8b7355;font-size:11px;font-style:italic">— only fund these once the parallel block is on track</span>
+        </div>`;
+    }
     const pct = s.target > 0 ? Math.min(100, Math.round((s.current / s.target) * 100)) : (s.status === 'done' ? 100 : 0);
+    const zoneTag = s.zone === 'parallel'
+      ? '<span style="font-size:9px;color:#0a6e4a;background:#d4e8dc;padding:1px 6px;border-radius:3px;text-transform:uppercase;letter-spacing:0.4px;margin-left:8px">parallel</span>'
+      : s.zone === 'surplus'
+      ? '<span style="font-size:9px;color:#7c2d12;background:#fff7ed;padding:1px 6px;border-radius:3px;text-transform:uppercase;letter-spacing:0.4px;margin-left:8px">surplus</span>'
+      : '';
     return `
     <div class="gp-step" onclick="this.classList.toggle('expanded')">
       <div class="gp-num ${s.status}">${s.status === 'done' ? '✓' : s.step}</div>
       <div class="gp-step-head">
         <div>
-          <div class="gp-step-title">${s.title}</div>
-          <div class="gp-step-date">Target: ${s.date}</div>
+          <div class="gp-step-title">${s.title}${zoneTag}</div>
+          <div class="gp-step-date">${s.date ? 'Target: ' + s.date : ''}</div>
         </div>
         <span class="gp-badge ${s.status}">${s.status === 'done' ? 'Complete' : s.status === 'active' ? 'In Progress' : 'Upcoming'}</span>
       </div>
@@ -1452,33 +1917,17 @@ function openGameplan() {
     </div>`;
   }).join('');
 
-  const chartHtml = renderProjectionChart(p.projections);
-
-  const enabledSubs = enabledSubGoals(p);
-  const monthlyTotal = enabledSubs.filter(sg => sg.cadence === 'monthly').reduce((sum, sg) => sum + sg.cost, 0);
-  const oneTimeTotal = enabledSubs.filter(sg => sg.cadence === 'one-time').reduce((sum, sg) => sum + sg.cost, 0);
-  const subGoalBanner = enabledSubs.length === 0 ? '' : `
-    <div style="background:#fff7ed;border:1px solid #fcd9a8;border-radius:10px;padding:12px 16px;margin-bottom:14px">
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
-        <span style="font-size:14px">📌</span>
-        <strong style="color:#022e21;font-size:13px">${enabledSubs.length} sub-goal${enabledSubs.length === 1 ? '' : 's'} active</strong>
-        <span style="color:#8b7355;font-size:11px">${monthlyTotal > 0 ? ' · $' + monthlyTotal.toLocaleString() + '/mo recurring' : ''}${oneTimeTotal > 0 ? ' · $' + oneTimeTotal.toLocaleString() + ' total in one-time commitments' : ''}</span>
-      </div>
-      <div style="font-size:11px;color:#4a4a4a;line-height:1.6">
-        ${enabledSubs.map(sg => `<div>• <strong>${sg.name}</strong> — ${formatSubGoalCost(sg)}</div>`).join('')}
-      </div>
-      <div style="font-size:10px;color:#8b7355;margin-top:8px;font-style:italic">These commitments compete with the priority order below. Ask the AI advisor how they affect your timelines.</div>
-    </div>`;
+  const chartHtml = renderProjectionChart(simulateNetWorth(p));
 
   document.getElementById('gpBody').innerHTML = `
-    ${subGoalBanner}
-    <div class="gp-priority">
-      <strong>Priority Order:</strong> 1) Emergency Fund → 2) 401(k) Match → 3) Kill High-Interest Debt (9%+) → 4) HSA → 5) Roth IRA → 6) Max 401(k) → 7) Mega Backdoor Roth → 8) Taxable Brokerage → 9) 529 Plans
-    </div>
+    ${renderFeasibilityPanel(p)}
     <div class="gp-steps">${stepsHtml}</div>
     <div class="gp-chart">
-      <h3>Net Worth Projection (If Gameplan Is Followed)</h3>
+      <h3>Net Worth Projection — Live Simulation</h3>
       ${chartHtml}
+      <div style="font-size:10px;color:#8b7355;margin-top:8px;font-style:italic;line-height:1.5">
+        Recomputed on every toggle. Net worth = cash + investments + home value − all debts. Investments earn 8%, emergency fund + cash savings 3%, home value appreciates 3%/yr, income grows 3%/yr. Each loan amortizes naturally per its standard term (mortgage 30yr, student loans 10yr, business 7yr, car 5yr, credit card 5yr baseline) — those minimums are inside monthly expenses. Floor (e-fund top-off + high-interest debt accelerated to 24mo) funds first; parallel goals + Roth IRA pro-rated when cash is short; surplus flows into investments. As loans pay off (naturally or accelerated), their minimums drop out of expenses and the freed cash automatically flows to the next priority. Directional, not a quote.
+      </div>
     </div>`;
 
   document.getElementById('gpOverlay').classList.add('open');
@@ -1612,7 +2061,13 @@ function saveMember() {
   const accs = accsRaw ? accsRaw.split(',').map(a => a.trim()).filter(a => a) : ['Checking'];
 
   const goalsRaw = document.getElementById('fm-goals').value.trim();
-  const goals = goalsRaw ? goalsRaw.split(',').map(g => g.trim()).filter(g => g) : ['Get finances organized'];
+  const goalNames = goalsRaw ? goalsRaw.split(',').map(g => g.trim()).filter(g => g) : [];
+  const goals = goalNames.map((name, i) => ({
+    id: 'custom_' + i + '_' + Date.now(),
+    name, desc: '', enabled: true,
+    amount: 0, cadence: 'one-time', targetYear: null, currentSaved: 0,
+    kind: 'cash', slot: 'parallel'
+  }));
 
   const bio = document.getElementById('fm-bio').value.trim() || `${name} is a new member. Limited information has been provided so far.`;
 
@@ -1651,9 +2106,7 @@ function saveMember() {
       employmentStability: "Unknown",
       accreditedInvestor: "Unknown",
       specialCircumstances: "New member, incomplete profile"
-    },
-    gameplan: [],
-    projections: []
+    }
   };
 
   PROFILES.push(newProfile);
@@ -1679,39 +2132,122 @@ function loadCustomProfiles() {
   });
 }
 
-/* ── SUB-GOAL TOGGLE STATE ── */
-function getSubGoalOverrides() {
-  return JSON.parse(localStorage.getItem('wealthbox_subgoal_state') || '{}');
+/* ── GOAL TOGGLE STATE ── */
+function getGoalOverrides() {
+  return JSON.parse(localStorage.getItem('wealthbox_goal_state') || '{}');
 }
 
-function getEffectiveEnabled(profile, subGoal) {
-  const overrides = getSubGoalOverrides();
-  if (overrides[profile.id] && subGoal.id in overrides[profile.id]) {
-    return overrides[profile.id][subGoal.id];
+function getEffectiveEnabled(profile, goal) {
+  const overrides = getGoalOverrides();
+  if (overrides[profile.id] && goal.id in overrides[profile.id]) {
+    return overrides[profile.id][goal.id];
   }
-  return !!subGoal.enabled;
+  return !!goal.enabled;
 }
 
-function toggleSubGoal(profileId, subGoalId) {
+function toggleGoal(profileId, goalId) {
   const profile = PROFILES.find(p => p.id === profileId);
-  if (!profile || !profile.subGoals) return;
-  const sg = profile.subGoals.find(s => s.id === subGoalId);
-  if (!sg) return;
-  const overrides = getSubGoalOverrides();
+  if (!profile || !profile.goals) return;
+  const g = profile.goals.find(x => x.id === goalId);
+  if (!g) return;
+  const overrides = getGoalOverrides();
   if (!overrides[profileId]) overrides[profileId] = {};
-  overrides[profileId][subGoalId] = !getEffectiveEnabled(profile, sg);
-  localStorage.setItem('wealthbox_subgoal_state', JSON.stringify(overrides));
+  overrides[profileId][goalId] = !getEffectiveEnabled(profile, g);
+  localStorage.setItem('wealthbox_goal_state', JSON.stringify(overrides));
   renderCard(profile);
 }
 
-function enabledSubGoals(profile) {
-  if (!profile.subGoals) return [];
-  return profile.subGoals.filter(sg => getEffectiveEnabled(profile, sg));
+function enabledGoals(profile) {
+  if (!profile.goals) return [];
+  return profile.goals.filter(g => getEffectiveEnabled(profile, g));
 }
 
-function formatSubGoalCost(sg) {
-  if (sg.cadence === 'monthly') return '$' + sg.cost.toLocaleString() + '/mo · ' + sg.horizon;
-  return '$' + sg.cost.toLocaleString() + ' · ' + sg.horizon;
+function formatGoalCost(g) {
+  const horizon = g.cadence === 'monthly'
+    ? 'ongoing'
+    : (g.targetYear ? 'by ' + g.targetYear : '—');
+  if (g.cadence === 'monthly') return '$' + g.amount.toLocaleString() + '/mo · ' + horizon;
+  return '$' + g.amount.toLocaleString() + ' · ' + horizon;
+}
+
+/* ─────────────────────────────────────────
+   ROTATING PROFILE ARC (empty state)
+───────────────────────────────────────── */
+let arcIndex = 0;
+let arcInterval = null;
+let arcPaused = false;
+
+function arcProfiles() {
+  // Skip Tasha (incomplete profile — not signal for "first-gen catching the family")
+  return PROFILES.filter(p => p.id !== 6).filter(p => p.id <= 5 || p.bio);
+}
+
+function renderArc() {
+  const stage = document.getElementById('arcStage');
+  if (!stage) return;
+  const list = arcProfiles();
+  const n = list.length;
+  if (n === 0) { stage.innerHTML = ''; return; }
+  stage.innerHTML = list.map((p, i) => {
+    let offset = (i - arcIndex) % n;
+    if (offset > n / 2) offset -= n;
+    if (offset < -n / 2) offset += n;
+    let posClass;
+    if (offset === 0) posClass = 'pos-current';
+    else if (offset === 1) posClass = 'pos-next';
+    else if (offset === -1) posClass = 'pos-prev';
+    else if (offset === 2) posClass = 'pos-next2';
+    else if (offset === -2) posClass = 'pos-prev2';
+    else posClass = 'pos-hidden';
+    return `
+      <div class="arc-card ${posClass}" onclick="selectArcProfile(${p.id})">
+        <div class="arc-card-avatar" style="background:${p.bg};border-color:${p.fg};color:${p.fg}">${p.emoji}</div>
+        <div class="arc-card-name">${p.name}</div>
+        <div class="arc-card-nick">${p.nick}</div>
+        <div class="arc-card-sub">${p.sub}</div>
+        <div class="arc-card-cta">Tap to chat &rarr;</div>
+      </div>`;
+  }).join('');
+  const dots = document.getElementById('arcDots');
+  if (dots) {
+    dots.innerHTML = list.map((p, i) =>
+      `<button class="arc-dot ${i === arcIndex ? 'active' : ''}" onclick="setArcIndex(${i}); resetArcInterval()" aria-label="${p.name}"></button>`
+    ).join('');
+  }
+}
+
+function arcAdvance(delta) {
+  const n = arcProfiles().length;
+  if (n === 0) return;
+  arcIndex = (arcIndex + delta + n) % n;
+  renderArc();
+}
+
+function setArcIndex(i) {
+  arcIndex = i;
+  renderArc();
+}
+
+function selectArcProfile(id) {
+  pickProfile(id);
+}
+
+function resetArcInterval() {
+  if (arcInterval) clearInterval(arcInterval);
+  arcInterval = setInterval(() => { if (!arcPaused) arcAdvance(1); }, 4500);
+}
+
+function pauseArc()  { arcPaused = true; }
+function resumeArc() { arcPaused = false; }
+
+function startArc() {
+  renderArc();
+  resetArcInterval();
+}
+
+function stopArc() {
+  if (arcInterval) { clearInterval(arcInterval); arcInterval = null; }
+  arcPaused = false;
 }
 
 function updateMemberCount() {
@@ -1728,16 +2264,19 @@ function sendAutoGreeting() {
   const pct = getProfileCompleteness(p);
   let greeting;
 
+  const topGoalName = (p.goals && p.goals[0] && p.goals[0].name) ? p.goals[0].name.toLowerCase() : null;
   if (pct < 50) {
     greeting = `Hey ${p.name.split(' ')[0]}! 👋 Welcome to Wealth Box. I can see we're just getting started with your profile, so I've got some of your basics but I'll need a bit more info to give you the best advice. Ask me anything and I'll let you know what I need along the way.`;
   } else if (pct < 100) {
-    greeting = `Hey ${p.name.split(' ')[0]}! 👋 I've got most of your financial picture loaded up. I can see you're working as a ${p.job} making ${fmt(p.inc)}/yr, and your top goal is to ${p.goals[0].toLowerCase()}. I'm missing a few details, but we can definitely get started. What's on your mind?`;
+    greeting = topGoalName
+      ? `Hey ${p.name.split(' ')[0]}! 👋 I've got most of your financial picture loaded up. I can see you're working as a ${p.job} making ${fmt(p.inc)}/yr, and your top goal is to ${topGoalName}. I'm missing a few details, but we can definitely get started. What's on your mind?`
+      : `Hey ${p.name.split(' ')[0]}! 👋 I've got most of your financial picture loaded up. I can see you're working as a ${p.job} making ${fmt(p.inc)}/yr. I'm missing a few details, but we can definitely get started. What's on your mind?`;
   } else {
-    const topGoal = p.goals[0].toLowerCase();
     const debtAmt = debtTotal(p);
+    const goalPart = topGoalName ? ` and your big goal is to ${topGoalName}` : '';
     greeting = debtAmt > 0
-      ? `Hey ${p.name.split(' ')[0]}! 👋 I've got your full financial profile loaded. I can see you're carrying ${fmt(debtAmt)} in debt and your big goal is to ${topGoal}. I've got some thoughts on how to get you there. What do you want to tackle first?`
-      : `Hey ${p.name.split(' ')[0]}! 👋 I've got your full financial profile loaded. You're in solid shape and your focus is on ${topGoal}. Let's make a plan. What's on your mind?`;
+      ? `Hey ${p.name.split(' ')[0]}! 👋 I've got your full financial profile loaded. I can see you're carrying ${fmt(debtAmt)} in debt${goalPart}. I've got some thoughts on how to get you there. What do you want to tackle first?`
+      : `Hey ${p.name.split(' ')[0]}! 👋 I've got your full financial profile loaded. You're in solid shape${topGoalName ? ' and your focus is on ' + topGoalName : ''}. Let's make a plan. What's on your mind?`;
   }
 
   // Show typing dots first, then type in the greeting
@@ -1792,7 +2331,7 @@ function openEditMember() {
   document.getElementById('fm-car').value = p.debt['Car Loan'] || '';
   document.getElementById('fm-mort').value = p.debt['Mortgage'] || '';
   document.getElementById('fm-accs').value = p.accs.join(', ');
-  document.getElementById('fm-goals').value = p.goals.join(', ');
+  document.getElementById('fm-goals').value = (p.goals || []).map(g => g.name).join(', ');
   document.getElementById('fm-bio').value = p.bio;
 
   // Change modal to edit mode
@@ -1844,7 +2383,16 @@ function updateMember(id) {
   p.accs = accsRaw ? accsRaw.split(',').map(a => a.trim()).filter(a => a) : ['Checking'];
 
   const goalsRaw = document.getElementById('fm-goals').value.trim();
-  p.goals = goalsRaw ? goalsRaw.split(',').map(g => g.trim()).filter(g => g) : ['Get finances organized'];
+  const goalNames = goalsRaw ? goalsRaw.split(',').map(g => g.trim()).filter(g => g) : [];
+  p.goals = goalNames.map((name, i) => {
+    const existing = (p.goals || []).find(g => g.name === name);
+    return existing || {
+      id: 'custom_' + i + '_' + Date.now(),
+      name, desc: '', enabled: true,
+      amount: 0, cadence: 'one-time', targetYear: null, currentSaved: 0,
+      kind: 'cash', slot: 'parallel'
+    };
+  });
 
   p.bio = document.getElementById('fm-bio').value.trim() || p.bio;
 
@@ -1982,6 +2530,7 @@ function exportChat() {
 loadCustomProfiles();
 updateMemberCount();
 renderList();
+renderChat();  // renders the empty-state arc (or chat if a profile is somehow already current)
 </script>
 <div class="gp-overlay" id="gpOverlay" onclick="if(event.target===this)closeGameplan()">
   <div class="gp-modal">
